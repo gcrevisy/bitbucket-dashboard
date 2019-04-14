@@ -40,5 +40,4 @@ public class Branche {
     public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
-
 }
