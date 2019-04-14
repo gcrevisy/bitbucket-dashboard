@@ -28,11 +28,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
-    <!-- <dependency>
+    <dependency>
       <groupId>fr.alteca.dashboard</groupId>
       <artifactId>bitbucket-dashboard-service</artifactId>
       <version>1.0-SNAPSHOT</version>
-    </dependency> -->
+    </dependency>
   </dependencies>
 
   <build>

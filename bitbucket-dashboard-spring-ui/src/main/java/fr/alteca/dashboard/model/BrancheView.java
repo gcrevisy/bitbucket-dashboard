@@ -1,15 +1,17 @@
 package fr.alteca.dashboard.model;
 
-public class Branche {
+public class BrancheView {
     private String name;
     private String creationDate;
+    private String color;
 
-    public Branche() {
+    public BrancheView() {
         this.name = "name";
         this.creationDate = "creationDate";
+        color = "red";
     }
 
-    public Branche(String name, String creationDate) {
+    public BrancheView(String name, String creationDate) {
         this.name = name;
         this.creationDate = creationDate;
     }
@@ -28,6 +30,14 @@ public class Branche {
 
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
 }
