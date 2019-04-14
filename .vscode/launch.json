@@ -6,13 +6,6 @@
             "request": "launch",
             "mainClass": "fr.alteca.dashboard.App",
             "projectName": "bitbucket-dashboard-spring-ui"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - App",
-            "request": "launch",
-            "mainClass": "fr.alteca.dashboard.App",
-            "projectName": "bitbucket-dashboard"
         }
     ]
 }
