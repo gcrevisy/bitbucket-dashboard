@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.wrapper.BitbucketWrapper;
@@ -30,7 +32,7 @@ public class BrancheServiceImpl implements BrancheService {
                 continue;
             }
 
-            if (!"feature".equals(item.getName())) {
+            if (StringUtils.isNotBlank(item.getName()) && !item.getName().startsWith("feature/")) {
                 result.add(item);
             }
         }

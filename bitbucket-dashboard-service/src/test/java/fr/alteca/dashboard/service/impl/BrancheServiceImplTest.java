@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import fr.alteca.dashboard.model.Branche;
+import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.wrapper.BitbucketWrapper;
 
@@ -29,6 +30,11 @@ public class BrancheServiceImplTest {
                 liste.add(new Branche("feature/toto", null, "gcrevisy"));
                 liste.add(new Branche("toto", null, "gcrevisy"));
                 return liste;
+            }
+
+            @Override
+            public List<Repository> listerRepositories(URI repoUri) {
+                return null;
             }
         };
     }
