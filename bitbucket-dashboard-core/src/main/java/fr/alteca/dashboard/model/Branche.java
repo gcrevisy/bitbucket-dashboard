@@ -11,6 +11,12 @@ public class Branche {
     public Branche() {
     }
 
+    public Branche(String name, Date dateCreation, String auteur) {
+        this.name = name;
+        this.dateCreation = dateCreation;
+        this.auteur = auteur;
+    }
+
     public String getName() {
         return this.name;
     }
