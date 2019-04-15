@@ -1,29 +1,29 @@
 package fr.alteca.dashboard.service.impl;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import fr.alteca.dashboard.model.Branche;
+import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
-import fr.alteca.dashboard.wrapper.BitbucketWrapper;
+import fr.alteca.dashboard.wrapper.BrancheDao;
 
 public class BrancheServiceImpl implements BrancheService {
 
-    private BitbucketWrapper bitbucketWrapper;
+    private BrancheDao brancheDao;
 
     public BrancheServiceImpl() {
     }
 
-    public BrancheServiceImpl(BitbucketWrapper bitbucketWrapper) {
-        this.bitbucketWrapper = bitbucketWrapper;
+    public BrancheServiceImpl(BrancheDao brancheDao) {
+        this.brancheDao = brancheDao;
     }
 
     @Override
-    public List<Branche> controlerNom(URI repoUri) {
-        List<Branche> liste = bitbucketWrapper.listerBranches(repoUri);
+    public List<Branche> controlerNom(Contexte contexte) {
+        List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 
         for (Branche item : liste) {
@@ -41,7 +41,7 @@ public class BrancheServiceImpl implements BrancheService {
     }
 
     @Override
-    public List<Branche> controlerDateCreation(URI repoUri) {
+    public List<Branche> controlerDateCreation(Contexte contexte) {
         return null;
     }
 
