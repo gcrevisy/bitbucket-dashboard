@@ -1,6 +1,8 @@
 package fr.alteca.dashboard.wrapper.impl;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,23 +11,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import fr.alteca.dashboard.model.Branche;
+import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.wrapper.BitbucketWrapper;
 
 public class BitbucketWrapperImpl implements BitbucketWrapper {
 
     @Override
-    public List<Branche> listerBranches(URI repoUri) {
+    public List<Branche> listerBranches(Contexte contexte) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Branche[]> branches = restTemplate.exchange(repoUri, HttpMethod.GET, null, Branche[].class);
-        return Arrays.asList(branches.getBody());
+        List<Branche> result = new ArrayList<Branche>();
+        URI repoUri;
+        try {
+            repoUri = new URI("");
+            ResponseEntity<Branche[]> branches = restTemplate.exchange(repoUri, HttpMethod.GET, null, Branche[].class);
+            result.addAll(Arrays.asList(branches.getBody()));
+        } catch (URISyntaxException e) {
+
+        }
+        return result;
     }
 
     @Override
-    public List<Repository> listerRepositories(URI repoUri) {
+    public List<Repository> listerRepositories(Contexte contexte) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Repository[]> branches = restTemplate.exchange(repoUri, HttpMethod.GET, null,
-                Repository[].class);
-        return Arrays.asList(branches.getBody());
+        List<Repository> result = new ArrayList<Repository>();
+        URI repoUri;
+        try {
+            repoUri = new URI("");
+            ResponseEntity<Repository[]> branches = restTemplate.exchange(repoUri, HttpMethod.GET, null,
+                    Repository[].class);
+            result.addAll(Arrays.asList(branches.getBody()));
+        } catch (URISyntaxException e) {
+
+        }
+        return result;
     }
 }
