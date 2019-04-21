@@ -1,4 +1,4 @@
-package fr.alteca.dashboard.wrapper;
+package fr.alteca.dashboard.dao;
 
 import java.util.List;
 

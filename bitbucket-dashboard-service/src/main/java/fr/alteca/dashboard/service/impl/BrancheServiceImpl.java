@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import fr.alteca.dashboard.dao.BrancheDao;
+import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
-import fr.alteca.dashboard.wrapper.BrancheDao;
 
 public class BrancheServiceImpl implements BrancheService {
 
@@ -22,7 +23,7 @@ public class BrancheServiceImpl implements BrancheService {
     }
 
     @Override
-    public List<Branche> controlerNom(Contexte contexte) {
+    public List<Branche> controlerNom(Contexte contexte) throws DashboardException {
         List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 

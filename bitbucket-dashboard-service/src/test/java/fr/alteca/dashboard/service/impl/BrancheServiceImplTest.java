@@ -7,17 +7,18 @@ import java.util.List;
 
 import org.junit.Test;
 
+import fr.alteca.dashboard.dao.BrancheDao;
+import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
-import fr.alteca.dashboard.wrapper.BrancheDao;
 
 public class BrancheServiceImplTest {
 
     @Test
-    public void controlerNomOk() {
+    public void controlerNomOk() throws DashboardException {
         BrancheService service = new BrancheServiceImpl(getBrancheDao());
-        assertTrue(service.controlerNom(null).size() > 0);
+        assertTrue(service.controlerNom(new Contexte()).size() > 0);
     }
 
     public BrancheDao getBrancheDao() {
