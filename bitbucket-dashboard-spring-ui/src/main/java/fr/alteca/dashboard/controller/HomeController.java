@@ -30,7 +30,16 @@ public class HomeController {
             e.printStackTrace();
         }
 
-        List<BrancheView> branches = new BrancheConverter().convertToViewModel(liste);
+        List<BrancheView> branches = new ArrayList<BrancheView>();
+        BrancheConverter converter = new BrancheConverter();
+        for (Branche item : liste) {
+            try {
+                branches.add(converter.convertToViewModel(item));
+            } catch (DashboardException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
 
         model.addAttribute("branches", branches);
 

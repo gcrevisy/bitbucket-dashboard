@@ -47,4 +47,10 @@ public class Contexte {
         this.brancheName = brancheName;
     }
 
+    @Override
+    public String toString() {
+        return "{" + " projectName='" + getProjectName() + "'" + ", repositoryName='" + getRepositoryName() + "'"
+                + ", brancheName='" + getBrancheName() + "'" + "}";
+    }
+
 }
