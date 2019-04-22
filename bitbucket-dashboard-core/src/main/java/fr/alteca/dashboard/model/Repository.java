@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Repository {
     private String name;
+    private String scm;
 
-    public Repository(String name) {
-        this.name = name;
+    public Repository() {
     }
 
     public String getName() {
@@ -16,6 +16,14 @@ public class Repository {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getScm() {
+        return this.scm;
+    }
+
+    public void setScm(String scm) {
+        this.scm = scm;
     }
 
 }

@@ -5,6 +5,9 @@ public class Contexte {
     private String repositoryName;
     private String brancheName;
 
+    public Contexte() {
+    }
+
     public Contexte(String projectName) {
         this.projectName = projectName;
     }
