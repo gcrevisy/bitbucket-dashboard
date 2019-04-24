@@ -24,7 +24,7 @@ public class BrancheServiceImpl implements BrancheService {
 
     @Override
     public List<Branche> controlerNom(Contexte contexte) throws DashboardException {
-        List<Branche> liste = new ArrayList<Branche>();// brancheDao.listerBranches(contexte);
+        List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 
         for (Branche item : liste) {
