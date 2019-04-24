@@ -1,19 +1,19 @@
 package fr.alteca.dashboard.model;
 
+import java.util.Objects;
+
 public class BrancheView {
     private String name;
-    private String creationDate;
-    private String color;
+    private String dateCreation;
+    private String auteur;
 
     public BrancheView() {
-        this.name = "name";
-        this.creationDate = "creationDate";
-        color = "red";
     }
 
-    public BrancheView(String name, String creationDate) {
+    public BrancheView(String name, String dateCreation, String auteur) {
         this.name = name;
-        this.creationDate = creationDate;
+        this.dateCreation = dateCreation;
+        this.auteur = auteur;
     }
 
     public String getName() {
@@ -24,20 +24,37 @@ public class BrancheView {
         this.name = name;
     }
 
-    public String getCreationDate() {
-        return this.creationDate;
+    public String getDateCreation() {
+        return this.dateCreation;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setDateCreation(String dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public String getColor() {
-        return this.color;
+    public String getAuteur() {
+        return this.auteur;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof BrancheView)) {
+            return false;
+        }
+        BrancheView brancheView = (BrancheView) o;
+        return Objects.equals(name, brancheView.name) && Objects.equals(dateCreation, brancheView.dateCreation)
+                && Objects.equals(auteur, brancheView.auteur);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, dateCreation, auteur);
     }
 
 }
