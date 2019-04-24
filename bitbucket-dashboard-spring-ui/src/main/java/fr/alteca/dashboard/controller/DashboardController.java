@@ -17,7 +17,7 @@ import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.service.impl.BrancheServiceImpl;
 
 @Controller
-public class HomeController {
+public class DashboardController {
 
     @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
     public String homePage(Model model) {
