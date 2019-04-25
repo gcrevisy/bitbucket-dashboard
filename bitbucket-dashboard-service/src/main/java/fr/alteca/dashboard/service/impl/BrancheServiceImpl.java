@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.alteca.dashboard.dao.BrancheDao;
+import fr.alteca.dashboard.dao.impl.BrancheDaoImpl;
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
 
 public class BrancheServiceImpl implements BrancheService {
-
+    private Logger logger = LoggerFactory.getLogger(BrancheServiceImpl.class);
     private BrancheDao brancheDao;
 
     public BrancheServiceImpl() {
+        brancheDao = new BrancheDaoImpl();
     }
 
     public BrancheServiceImpl(BrancheDao brancheDao) {
@@ -24,6 +28,7 @@ public class BrancheServiceImpl implements BrancheService {
 
     @Override
     public List<Branche> controlerNom(Contexte contexte) throws DashboardException {
+        logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
         List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 

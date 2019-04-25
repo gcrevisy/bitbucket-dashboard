@@ -1,27 +1,28 @@
 package fr.alteca.dashboard.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
+import fr.alteca.dashboard.model.Contexte;
+import fr.alteca.dashboard.service.impl.BrancheServiceImpl;
 
 @Controller
 public class RestController {
 
+    Logger logger = LoggerFactory.getLogger(RestController.class);
+
     @ResponseBody
     @RequestMapping(value = { "/branches" })
-    public List<Branche> listBranches() {
-        List<Branche> resuList = new ArrayList<Branche>();
-        resuList.add(new Branche("name1", null, "auteur"));
-        resuList.add(new Branche("name2", null, "auteur"));
-        resuList.add(new Branche("name3", null, "auteur"));
-        resuList.add(new Branche("name4", null, "auteur"));
-        resuList.add(new Branche("name5", null, "auteur"));
-        return resuList;
+    public List<Branche> listBranches() throws DashboardException {
+        logger.info("Entrée dans la méthode RestController#listBranches");
+        return new BrancheServiceImpl().controlerNom(new Contexte("poc-junit", "gcrevisy"));
     }
 
 }

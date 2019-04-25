@@ -12,6 +12,11 @@
     </nav>
     <br />
     <div style="padding-left: 15%; padding-right: 15%">
+        Projet : <span th:text="${contexte.repositoryName}">repositoryName</span>
+        <br />
+        Dépôt : <span th:text="${contexte.projectName}">projectName</span>
+        <br />
+        <br />
         <table class="table table-hover">
             <tr>
                 <th scope="col" style="width: 20px;">&nbsp;</th>
@@ -21,7 +26,7 @@
             <tr data-th-each="branche : ${branches}">
                 <th scope="col" style="width: 20px;">&nbsp;</th>
                 <td data-th-text="${branche.name}">...</td>
-                <td data-th-text="${branche.creationDate}">...</td>
+                <td data-th-text="${branche.dateCreation}">...</td>
             </tr>
         </table>
     </div>
