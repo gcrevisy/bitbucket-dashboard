@@ -2,7 +2,6 @@ package fr.alteca.dashboard.converter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -41,8 +40,6 @@ public class BrancheConverter implements Converter<Branche, BrancheView> {
         result.setAuteur(item.getAuteur());
         if (item.getDateCreation() != null) {
             result.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(item.getDateCreation()));
-        } else {
-            result.setDateCreation("empty");
         }
         result.setName(item.getName());
 

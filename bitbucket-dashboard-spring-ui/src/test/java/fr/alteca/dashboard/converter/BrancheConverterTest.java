@@ -89,7 +89,7 @@ public class BrancheConverterTest {
     private BrancheView getModelDateNull() {
         BrancheView branche = new BrancheView();
         branche.setAuteur("auteur");
-        branche.setDateCreation("empty");
+        branche.setDateCreation(null);
         branche.setName("name");
         return branche;
     }
