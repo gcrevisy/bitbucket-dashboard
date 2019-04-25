@@ -14,7 +14,7 @@ public class RepositoryDaoImplTest {
     @Test
     public void listerRepositoriesTest() {
         RepositoryDao dao = new RepositoryDaoImpl();
-        List<Repository> liste = dao.listerRepositories(new Contexte("projectName"));
+        List<Repository> liste = dao.listerRepositories(new Contexte("gcrevisy"));
         Assert.assertTrue(!liste.isEmpty());
     }
 }
