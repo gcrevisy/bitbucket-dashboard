@@ -19,9 +19,9 @@ public final class UriBuilder {
 
         if (StringUtils.isNotBlank(contexte.getRepositoryName())) {
             uriValue += contexte.getRepositoryName();
-        }
-        if (StringUtils.isNotBlank(contexte.getProjectName())) {
-            uriValue += "/" + contexte.getProjectName() + "/refs/branches/";
+            if (StringUtils.isNotBlank(contexte.getProjectName())) {
+                uriValue += "/" + contexte.getProjectName() + "/refs/branches/";
+            }
         }
         try {
             uri = new URI(uriValue);
