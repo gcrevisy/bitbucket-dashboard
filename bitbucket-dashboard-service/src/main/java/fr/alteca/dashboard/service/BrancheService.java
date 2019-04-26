@@ -21,6 +21,7 @@ public interface BrancheService {
      * 
      * @param contexte {@link Contexte}
      * @return Liste des {@link Branche} en erreur
+     * @throws DashboardException
      */
-    List<Branche> controlerDateCreation(Contexte contexte);
+    List<Branche> controlerDateCreation(Contexte contexte) throws DashboardException;
 }

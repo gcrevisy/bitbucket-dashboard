@@ -47,8 +47,18 @@ public class BrancheServiceImpl implements BrancheService {
     }
 
     @Override
-    public List<Branche> controlerDateCreation(Contexte contexte) {
-        return null;
+    public List<Branche> controlerDateCreation(Contexte contexte) throws DashboardException {
+        logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+        List<Branche> liste = brancheDao.listerBranches(contexte);
+        List<Branche> result = new ArrayList<Branche>();
+
+        for (Branche item : liste) {
+
+            // FIXME corriger les controles sur les dates
+            result.add(item);
+        }
+
+        return result;
     }
 
 }

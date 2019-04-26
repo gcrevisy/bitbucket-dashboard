@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,9 +27,34 @@ public class DashboardController {
     public String homePage(Model model) {
         logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
 
+        Contexte contexte = new Contexte("", "");
+
+        model.addAttribute("contexte", contexte);
+        model.addAttribute("branches", new ArrayList<BrancheView>());
+
+        return "home";
+    }
+
+    @RequestMapping(value = { "/home/project/{projectName}" }, method = RequestMethod.GET)
+    public String homePage(Model model, @PathVariable("projectName") String projectName) {
+        logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
+
+        Contexte contexte = new Contexte(projectName, "");
+
+        model.addAttribute("contexte", contexte);
+        model.addAttribute("branches", new ArrayList<BrancheView>());
+
+        return "home";
+    }
+
+    @RequestMapping(value = { "/home/project/{projectName}/repository/{repositoryName}" }, method = RequestMethod.GET)
+    public String homePage(Model model, @PathVariable("projectName") String projectName,
+            @PathVariable("repositoryName") String repositoryName) {
+        logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
+
         BrancheService service = new BrancheServiceImpl();
         List<Branche> liste = new ArrayList<Branche>();
-        Contexte contexte = new Contexte("poc-junit", "gcrevisy");
+        Contexte contexte = new Contexte(projectName, repositoryName);
 
         try {
             liste.addAll(service.controlerNom(contexte));
