@@ -9,12 +9,26 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Bitbucket-Dashboard</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dépôts
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
     <br />
     <div style="padding-left: 15%; padding-right: 15%">
-        Projet : <span th:text="${contexte.repositoryName}">repositoryName</span>
+        <b>Projet : </b><span th:text="${contexte.repositoryName}">repositoryName</span>
         <br />
-        Dépôt : <span th:text="${contexte.projectName}">projectName</span>
+        <b>Dépôt : </b><span th:text="${contexte.projectName}">projectName</span>
         <br />
         <br />
         <table class="table table-hover">

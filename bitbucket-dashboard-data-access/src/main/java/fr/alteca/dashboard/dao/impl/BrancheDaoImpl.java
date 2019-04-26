@@ -15,7 +15,7 @@ import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.utils.ModelValidator;
 import fr.alteca.dashboard.utils.UriBuilder;
 
-public class BrancheDaoImpl extends AbstractDao implements BrancheDao {
+public class BrancheDaoImpl implements BrancheDao {
 
     @Override
     public List<Branche> listerBranches(Contexte contexte) throws DashboardException {

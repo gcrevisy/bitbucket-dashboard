@@ -19,10 +19,17 @@ public class RestController {
     Logger logger = LoggerFactory.getLogger(RestController.class);
 
     @ResponseBody
-    @RequestMapping(value = { "/branches" })
-    public List<Branche> listBranches() throws DashboardException {
+    @RequestMapping(value = { "/brancheNamingError" })
+    public List<Branche> listBranchesNamingError() throws DashboardException {
         logger.info("Entrée dans la méthode RestController#listBranches");
         return new BrancheServiceImpl().controlerNom(new Contexte("poc-junit", "gcrevisy"));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = { "/brancheDateError" })
+    public List<Branche> listBranchesDateError() throws DashboardException {
+        logger.info("Entrée dans la méthode RestController#listBranches");
+        return new BrancheServiceImpl().controlerDateCreation(new Contexte("poc-junit", "gcrevisy"));
     }
 
 }

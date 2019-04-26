@@ -13,7 +13,7 @@ import fr.alteca.dashboard.model.Repositories;
 import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.utils.UriBuilder;
 
-public class RepositoryDaoImpl extends AbstractDao implements RepositoryDao {
+public class RepositoryDaoImpl implements RepositoryDao {
 
     @Override
     public List<Repository> listerRepositories(Contexte contexte) {
