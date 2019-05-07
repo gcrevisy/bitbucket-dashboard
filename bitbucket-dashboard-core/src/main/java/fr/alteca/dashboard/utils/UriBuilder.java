@@ -32,7 +32,8 @@ public final class UriBuilder {
             logger.info("Construction de l'uri " + uriValue);
             uri = new URI(uriValue);
         } catch (URISyntaxException e) {
-            throw new DashboardException("impossible de construire l'URI avec le contexte" + contexte.toString());
+            logger.error("Impossible de construire l'URI avec le contexte" + contexte.toString());
+            throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
         }
 
         return uri;

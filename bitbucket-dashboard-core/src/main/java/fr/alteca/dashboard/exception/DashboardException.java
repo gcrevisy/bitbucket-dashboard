@@ -9,6 +9,10 @@ public class DashboardException extends Exception {
         super(msg);
     }
 
+    public DashboardException(String msg, Throwable t) {
+        super(msg, t);
+    }
+
     private static final long serialVersionUID = 1L;
 
 }
