@@ -17,29 +17,33 @@ import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.BrancheView;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
+import fr.alteca.dashboard.service.RepositoryService;
 import fr.alteca.dashboard.service.impl.BrancheServiceImpl;
+import fr.alteca.dashboard.service.impl.RepositoryServiceImpl;
 
 @Controller
 public class DashboardController {
     private Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
-    @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
-    public String homePage(Model model) {
+    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+    public String home(Model model) {
         logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
 
         Contexte contexte = new Contexte("", "");
 
+        RepositoryService rs = new RepositoryServiceImpl();
+
         model.addAttribute("contexte", contexte);
-        model.addAttribute("branches", new ArrayList<BrancheView>());
+        model.addAttribute("repositories", new ArrayList<BrancheView>());
 
         return "home";
     }
 
-    @RequestMapping(value = { "/home/project/{projectName}" }, method = RequestMethod.GET)
-    public String homePage(Model model, @PathVariable("projectName") String projectName) {
+    @RequestMapping(value = { "/repository/{repositoryName}" }, method = RequestMethod.GET)
+    public String projects(Model model, @PathVariable("repositoryName") String repositoryName) {
         logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
 
-        Contexte contexte = new Contexte(projectName, "");
+        Contexte contexte = new Contexte(repositoryName, "");
 
         model.addAttribute("contexte", contexte);
         model.addAttribute("branches", new ArrayList<BrancheView>());
@@ -47,14 +51,14 @@ public class DashboardController {
         return "home";
     }
 
-    @RequestMapping(value = { "/home/project/{projectName}/repository/{repositoryName}" }, method = RequestMethod.GET)
-    public String homePage(Model model, @PathVariable("projectName") String projectName,
-            @PathVariable("repositoryName") String repositoryName) {
+    @RequestMapping(value = { "/repository/{repositoryName}/project/{projectName}" }, method = RequestMethod.GET)
+    public String homePage(Model model, @PathVariable("repositoryName") String repositoryName,
+            @PathVariable("projectName") String projectName) {
         logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
 
         BrancheService service = new BrancheServiceImpl();
         List<Branche> liste = new ArrayList<Branche>();
-        Contexte contexte = new Contexte(projectName, repositoryName);
+        Contexte contexte = new Contexte(repositoryName, projectName);
 
         try {
             liste.addAll(service.controlerNom(contexte));

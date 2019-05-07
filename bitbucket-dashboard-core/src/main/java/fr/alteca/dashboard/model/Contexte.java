@@ -1,25 +1,25 @@
 package fr.alteca.dashboard.model;
 
 public class Contexte {
-    private String projectName;
     private String repositoryName;
+    private String projectName;
     private String brancheName;
 
     public Contexte() {
     }
 
-    public Contexte(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public Contexte(String projectName, String repositoryName) {
-        this.projectName = projectName;
+    public Contexte(String repositoryName) {
         this.repositoryName = repositoryName;
     }
 
-    public Contexte(String projectName, String repositoryName, String brancheName) {
-        this.projectName = projectName;
+    public Contexte(String repositoryName, String projectName) {
         this.repositoryName = repositoryName;
+        this.projectName = projectName;
+    }
+
+    public Contexte(String repositoryName, String projectName, String brancheName) {
+        this.repositoryName = repositoryName;
+        this.projectName = projectName;
         this.brancheName = brancheName;
     }
 

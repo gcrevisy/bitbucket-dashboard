@@ -22,7 +22,7 @@ public class RestController {
     @RequestMapping(value = { "/brancheNamingError" })
     public List<Branche> listBranchesNamingError() throws DashboardException {
         logger.info("Entrée dans la méthode RestController#listBranches");
-        return new BrancheServiceImpl().controlerNom(new Contexte("poc-junit", "gcrevisy"));
+        return new BrancheServiceImpl().controlerNom(new Contexte("gcrevisy", "poc-junit"));
     }
 
     @ResponseBody
