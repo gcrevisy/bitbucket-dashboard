@@ -8,7 +8,6 @@ import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.service.RepositoryService;
-import fr.alteca.dashboard.utils.ModelValidator;
 
 public class RepositoryServiceImpl implements RepositoryService {
     private RepositoryDao repositoryDao;
@@ -17,9 +16,12 @@ public class RepositoryServiceImpl implements RepositoryService {
         repositoryDao = new RepositoryDaoImpl();
     }
 
+    public RepositoryServiceImpl(RepositoryDao repositoryDao) {
+        this.repositoryDao = repositoryDao;
+    }
+
     @Override
     public List<Repository> listerRepositories(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
         return repositoryDao.listerRepositories(contexte);
     }
 }
