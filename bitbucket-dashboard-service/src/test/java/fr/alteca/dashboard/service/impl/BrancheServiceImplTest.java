@@ -35,6 +35,7 @@ public class BrancheServiceImplTest {
                 liste.add(new Branche("master", null, "gcrevisy"));
                 liste.add(new Branche("feature/toto", null, "gcrevisy"));
                 liste.add(new Branche("toto", null, "gcrevisy"));
+                liste.add(new Branche("", null, "gcrevisy"));
                 return liste;
             }
         };
