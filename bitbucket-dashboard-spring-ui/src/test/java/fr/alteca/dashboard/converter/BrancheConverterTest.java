@@ -26,16 +26,14 @@ public class BrancheConverterTest {
         converter.convertToViewModel(null);
     }
 
-    @Ignore
     @Test
     public void convertSourceOk() throws DashboardException {
         BrancheConverter converter = new BrancheConverter();
         Branche branche = converter.convertToData(getModel());
 
-        Assert.assertTrue(getData().equals(branche));
+        Assert.assertEquals(getData(), branche);
     }
 
-    @Ignore
     @Test
     public void convertTargetOk() throws DashboardException {
         BrancheConverter converter = new BrancheConverter();
@@ -73,7 +71,7 @@ public class BrancheConverterTest {
     private BrancheView getModel() {
         BrancheView branche = new BrancheView();
         branche.setAuteur("auteur");
-        branche.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date(2019, 04, 24)));
+        branche.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date(119, 03, 24)));
         branche.setName("name");
         return branche;
     }
