@@ -16,6 +16,7 @@ import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.BrancheView;
 import fr.alteca.dashboard.model.Contexte;
+import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.service.RepositoryService;
 import fr.alteca.dashboard.service.impl.BrancheServiceImpl;
@@ -32,9 +33,16 @@ public class DashboardController {
         Contexte contexte = new Contexte("", "");
 
         RepositoryService rs = new RepositoryServiceImpl();
+        List<Repository> liste = new ArrayList<Repository>();
+
+        try {
+            liste.addAll(rs.listerRepositories(contexte));
+        } catch (DashboardException e) {
+            logger.warn("Erreur pendant le chargement des repositories" + e.getMessage());
+        }
 
         model.addAttribute("contexte", contexte);
-        model.addAttribute("repositories", new ArrayList<BrancheView>());
+        model.addAttribute("repositories", liste);
 
         return "home";
     }
