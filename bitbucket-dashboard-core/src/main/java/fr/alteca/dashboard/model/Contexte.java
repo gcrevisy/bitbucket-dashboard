@@ -49,8 +49,8 @@ public class Contexte {
 
     @Override
     public String toString() {
-        return "{" + " projectName='" + getProjectName() + "'" + ", repositoryName='" + getRepositoryName() + "'"
-                + ", brancheName='" + getBrancheName() + "'" + "}";
+        return "{ " + "repositoryName='" + getRepositoryName() + "'" + ", projectName='" + getProjectName() + "'"
+                + ", brancheName='" + getBrancheName() + "'" + " }";
     }
 
 }
