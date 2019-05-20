@@ -17,12 +17,18 @@ public class BrancheJsonConverter implements Converter<BrancheJson, Branche> {
 
     @Override
     public BrancheJson convertToJsonModel(Branche item) throws DashboardException {
+        if (item == null)
+            throw new DashboardException("Item null pendant la conversion");
+
         BrancheJson result = new BrancheJson();
         return result;
     }
 
     @Override
     public Branche convertToModel(BrancheJson item) throws DashboardException {
+        if (item == null)
+            throw new DashboardException("Item null pendant la conversion");
+
         Branche result = new Branche();
 
         result.setName(item.getName());
