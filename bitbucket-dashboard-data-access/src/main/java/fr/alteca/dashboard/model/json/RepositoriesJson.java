@@ -1,24 +1,24 @@
-package fr.alteca.dashboard.model;
+package fr.alteca.dashboard.model.json;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Repositories {
+public class RepositoriesJson {
 
     private String pagelen;
-    private List<Repository> values;
+    private List<RepositoryJson> values;
 
-    public Repositories() {
+    public RepositoriesJson() {
 
     }
 
-    public List<Repository> getValues() {
+    public List<RepositoryJson> getValues() {
         return this.values;
     }
 
-    public void setValues(List<Repository> values) {
+    public void setValues(List<RepositoryJson> values) {
         this.values = values;
     }
 

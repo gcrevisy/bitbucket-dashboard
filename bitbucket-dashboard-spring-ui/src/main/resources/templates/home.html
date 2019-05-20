@@ -35,11 +35,13 @@
                 <th scope="col" style="width: 20px;">&nbsp;</th>
                 <th scope="col">Branche name</th>
                 <th scope="col">Creation date</th>
+                <th scope="col">Créateur</th>
             </tr>
             <tr data-th-each="branche : ${branches}">
                 <th scope="col" style="width: 20px;">&nbsp;</th>
                 <td data-th-text="${branche.name}">...</td>
                 <td data-th-text="${branche.dateCreation}">...</td>
+                <td data-th-text="${branche.auteur}">...</td>
             </tr>
         </table>
     </div>

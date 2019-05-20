@@ -1,21 +1,19 @@
 package fr.alteca.dashboard.model;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Branche {
 
     private String name;
-    private Date dateCreation;
+    private GregorianCalendar dateCreation;
     private String auteur;
 
     public Branche() {
     }
 
-    public Branche(String name, Date dateCreation, String auteur) {
+    public Branche(String name, GregorianCalendar dateCreation, String auteur) {
         this.name = name;
         this.dateCreation = dateCreation;
         this.auteur = auteur;
@@ -29,11 +27,11 @@ public class Branche {
         this.name = name;
     }
 
-    public Date getDateCreation() {
+    public GregorianCalendar getDateCreation() {
         return this.dateCreation;
     }
 
-    public void setDateCreation(Date dateCreation) {
+    public void setDateCreation(GregorianCalendar dateCreation) {
         this.dateCreation = dateCreation;
     }
 

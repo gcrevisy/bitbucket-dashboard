@@ -2,6 +2,8 @@ package fr.alteca.dashboard.converter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +22,9 @@ public class BrancheConverter implements Converter<Branche, BrancheView> {
         try {
             result.setAuteur(item.getAuteur());
             if (StringUtils.isNotBlank(item.getDateCreation())) {
-                result.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").parse(item.getDateCreation()));
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(item.getDateCreation()));
+                result.setDateCreation(gc);
             }
             result.setName(item.getName());
         } catch (ParseException e) {
@@ -39,7 +43,7 @@ public class BrancheConverter implements Converter<Branche, BrancheView> {
 
         result.setAuteur(item.getAuteur());
         if (item.getDateCreation() != null) {
-            result.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(item.getDateCreation()));
+            result.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(item.getDateCreation().getTime()));
         }
         result.setName(item.getName());
 

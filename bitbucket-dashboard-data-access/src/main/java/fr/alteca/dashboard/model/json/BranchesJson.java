@@ -1,13 +1,13 @@
-package fr.alteca.dashboard.model;
+package fr.alteca.dashboard.model.json;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Branches {
+public class BranchesJson {
     private String pagelen;
-    private List<Branche> values;
+    private List<BrancheJson> values;
 
     public String getPagelen() {
         return this.pagelen;
@@ -17,11 +17,11 @@ public class Branches {
         this.pagelen = pagelen;
     }
 
-    public List<Branche> getValues() {
+    public List<BrancheJson> getValues() {
         return this.values;
     }
 
-    public void setValues(List<Branche> values) {
+    public void setValues(List<BrancheJson> values) {
         this.values = values;
     }
 

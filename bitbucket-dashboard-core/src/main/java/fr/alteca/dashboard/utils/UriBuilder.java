@@ -26,6 +26,9 @@ public final class UriBuilder {
             uriValue += contexte.getRepositoryName();
             if (StringUtils.isNotBlank(contexte.getProjectName())) {
                 uriValue += "/" + contexte.getProjectName() + "/refs/branches/";
+                if (StringUtils.isNotBlank(contexte.getBrancheName())) {
+                    uriValue += contexte.getBrancheName();
+                }
             }
         }
         try {

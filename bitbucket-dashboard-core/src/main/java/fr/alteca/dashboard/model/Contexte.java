@@ -23,6 +23,12 @@ public class Contexte {
         this.brancheName = brancheName;
     }
 
+    public Contexte(Contexte contexte) {
+        setRepositoryName(contexte.getRepositoryName());
+        setProjectName(contexte.getProjectName());
+        setBrancheName(contexte.getBrancheName());
+    }
+
     public String getProjectName() {
         return this.projectName;
     }

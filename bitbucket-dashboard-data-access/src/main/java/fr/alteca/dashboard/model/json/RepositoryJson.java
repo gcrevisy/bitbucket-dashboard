@@ -1,10 +1,13 @@
-package fr.alteca.dashboard.model;
+package fr.alteca.dashboard.model.json;
 
-public class Repository {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class RepositoryJson {
     private String name;
     private String scm;
 
-    public Repository() {
+    public RepositoryJson() {
     }
 
     public String getName() {

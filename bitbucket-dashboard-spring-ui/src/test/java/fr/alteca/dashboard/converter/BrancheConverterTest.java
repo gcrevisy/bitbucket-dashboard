@@ -2,10 +2,9 @@ package fr.alteca.dashboard.converter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.alteca.dashboard.exception.DashboardException;
@@ -60,7 +59,9 @@ public class BrancheConverterTest {
         Branche branche = new Branche();
         branche.setAuteur("auteur");
         try {
-            branche.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").parse("24/04/2019"));
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(new SimpleDateFormat("dd/MM/yyyy").parse("24/04/2019"));
+            branche.setDateCreation(gc);
         } catch (ParseException e) {
             throw new DashboardException(e.getMessage());
         }
@@ -71,7 +72,7 @@ public class BrancheConverterTest {
     private BrancheView getModel() {
         BrancheView branche = new BrancheView();
         branche.setAuteur("auteur");
-        branche.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new Date(119, 03, 24)));
+        branche.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new GregorianCalendar(119, 03, 24)));
         branche.setName("name");
         return branche;
     }

@@ -9,8 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 import fr.alteca.dashboard.dao.RepositoryDao;
 import fr.alteca.dashboard.model.Contexte;
-import fr.alteca.dashboard.model.Repositories;
 import fr.alteca.dashboard.model.Repository;
+import fr.alteca.dashboard.model.json.RepositoriesJson;
 import fr.alteca.dashboard.utils.UriBuilder;
 
 public class RepositoryDaoImpl implements RepositoryDao {
@@ -20,9 +20,9 @@ public class RepositoryDaoImpl implements RepositoryDao {
         List<Repository> result = new ArrayList<Repository>();
         RestTemplate restTemplate = new RestTemplate();
         try {
-            ResponseEntity<Repositories> results = restTemplate.exchange(UriBuilder.buildUri(contexte), HttpMethod.GET,
-                    null, Repositories.class);
-            result.addAll(results.getBody().getValues());
+            ResponseEntity<RepositoriesJson> results = restTemplate.exchange(UriBuilder.buildUri(contexte),
+                    HttpMethod.GET, null, RepositoriesJson.class);
+            // FIXME result.addAll(results.getBody().getValues());
         } catch (Exception e) {
             System.out.println(e.getCause());
         }
