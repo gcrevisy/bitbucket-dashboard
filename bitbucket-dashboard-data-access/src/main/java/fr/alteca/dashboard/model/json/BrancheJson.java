@@ -13,6 +13,11 @@ public class BrancheJson {
     public BrancheJson() {
     }
 
+    public BrancheJson(String name, TargetJson target) {
+        this.name = name;
+        this.target = target;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -27,6 +32,22 @@ public class BrancheJson {
 
     public void setTarget(TargetJson target) {
         this.target = target;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof BrancheJson)) {
+            return false;
+        }
+        BrancheJson brancheJson = (BrancheJson) o;
+        return Objects.equals(name, brancheJson.name) && Objects.equals(target, brancheJson.target);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, target);
     }
 
 }
