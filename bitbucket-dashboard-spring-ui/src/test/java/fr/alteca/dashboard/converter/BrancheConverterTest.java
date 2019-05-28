@@ -72,7 +72,8 @@ public class BrancheConverterTest {
     private BrancheView getModel() {
         BrancheView branche = new BrancheView();
         branche.setAuteur("auteur");
-        branche.setDateCreation(new SimpleDateFormat("dd/MM/yyyy").format(new GregorianCalendar(119, 03, 24)));
+        branche.setDateCreation(
+                new SimpleDateFormat("dd/MM/yyyy").format(new GregorianCalendar(2019, 03, 24).getTime()));
         branche.setName("name");
         return branche;
     }
