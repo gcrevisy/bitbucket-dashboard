@@ -13,6 +13,7 @@ import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
+import fr.alteca.dashboard.utils.ModelValidator;
 
 public class BrancheServiceImpl implements BrancheService {
     private Logger logger = LoggerFactory.getLogger(BrancheServiceImpl.class);
@@ -28,7 +29,9 @@ public class BrancheServiceImpl implements BrancheService {
 
     @Override
     public List<Branche> controlerNom(Contexte contexte) throws DashboardException {
+        ModelValidator.validerContexte(contexte);
         logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+
         List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 
@@ -48,7 +51,9 @@ public class BrancheServiceImpl implements BrancheService {
 
     @Override
     public List<Branche> controlerDateCreation(Contexte contexte) throws DashboardException {
+        ModelValidator.validerContexte(contexte);
         logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+
         List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 

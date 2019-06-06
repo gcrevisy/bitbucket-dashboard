@@ -31,6 +31,7 @@ public final class UriBuilder {
                 }
             }
         }
+        uriValue += "?limit=" + contexte.getPageSize();
         try {
             logger.info("Construction de l'uri " + uriValue);
             uri = new URI(uriValue);

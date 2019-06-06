@@ -27,6 +27,18 @@ public class BrancheServiceImplTest {
         assertTrue(service.controlerDateCreation(new Contexte()).size() > 0);
     }
 
+    @Test(expected = DashboardException.class)
+    public void controlerNomContexteNull() throws DashboardException {
+        BrancheService service = new BrancheServiceImpl(getBrancheDao());
+        service.controlerNom(null);
+    }
+
+    @Test(expected = DashboardException.class)
+    public void controlerDateCreationContexteNull() throws DashboardException {
+        BrancheService service = new BrancheServiceImpl(getBrancheDao());
+        service.controlerDateCreation(null);
+    }
+
     private BrancheDao getBrancheDao() {
         return new BrancheDao() {
             @Override
