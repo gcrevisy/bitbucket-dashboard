@@ -18,13 +18,13 @@ public class BrancheServiceImplTest {
     @Test
     public void controlerNomOk() throws DashboardException {
         BrancheService service = new BrancheServiceImpl(getBrancheDao());
-        assertTrue(service.controlerNom(new Contexte()).size() > 0);
+        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
     }
 
     @Test
     public void controlerDateCreationOk() throws DashboardException {
         BrancheService service = new BrancheServiceImpl(getBrancheDao());
-        assertTrue(service.controlerDateCreation(new Contexte()).size() > 0);
+        assertTrue(service.controlerDateCreation(new Contexte("gcrevisy")).size() > 0);
     }
 
     @Test(expected = DashboardException.class)
