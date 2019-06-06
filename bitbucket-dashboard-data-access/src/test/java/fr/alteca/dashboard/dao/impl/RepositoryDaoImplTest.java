@@ -11,10 +11,10 @@ import fr.alteca.dashboard.model.Repository;
 
 public class RepositoryDaoImplTest {
 
-    // @Test
+    @Test
     public void listerRepositoriesTest() {
         RepositoryDao dao = new RepositoryDaoImpl();
         List<Repository> liste = dao.listerRepositories(new Contexte("gcrevisy"));
-        Assert.assertTrue(!liste.isEmpty());
+        Assert.assertTrue(liste != null);
     }
 }

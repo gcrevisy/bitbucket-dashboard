@@ -2,7 +2,6 @@ package fr.alteca.dashboard.converter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.StringUtils;
