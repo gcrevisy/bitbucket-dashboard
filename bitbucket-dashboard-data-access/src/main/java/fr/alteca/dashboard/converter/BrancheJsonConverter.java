@@ -28,7 +28,7 @@ public class BrancheJsonConverter implements Converter<BrancheJson, Branche> {
         Branche result = new Branche();
 
         result.setName(item.getName());
-        result.setAuteur(item.getTarget().getAuthor().getUser().getUsername());
+        result.setAuteur(item.getTarget().getAuthor().getUser().getNickname());
         if (StringUtils.isNotBlank(item.getTarget().getDate())) {
             try {
                 GregorianCalendar gc = new GregorianCalendar();

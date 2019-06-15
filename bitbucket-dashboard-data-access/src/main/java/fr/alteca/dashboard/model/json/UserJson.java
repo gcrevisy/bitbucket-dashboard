@@ -6,21 +6,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserJson {
-    private String username;
+    private String nickname;
 
     public UserJson() {
     }
 
     public UserJson(String username) {
-        this.username = username;
+        this.nickname = username;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getNickname() {
+        return this.nickname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override
@@ -31,12 +31,12 @@ public class UserJson {
             return false;
         }
         UserJson userJson = (UserJson) o;
-        return Objects.equals(username, userJson.username);
+        return Objects.equals(nickname, userJson.nickname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(username);
+        return Objects.hashCode(nickname);
     }
 
 }
