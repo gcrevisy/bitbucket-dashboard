@@ -1,16 +1,12 @@
 package fr.alteca.dashboard.dao.impl;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import fr.alteca.dashboard.converter.BrancheJsonConverter;
@@ -66,17 +62,18 @@ public class BrancheDaoImpl implements BrancheDao {
         return result;
     }
 
-    private MultiValueMap createHeaders(String username, String password) {
-        return new HttpHeaders() {
-            private static final long serialVersionUID = 1L;
+    // private MultiValueMap createHeaders(String username, String password) {
+    // return new HttpHeaders() {
+    // private static final long serialVersionUID = 1L;
 
-            {
-                String auth = username + ":" + password;
-                byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(Charset.forName("US-ASCII")));
-                String authHeader = "Basic " + new String(encodedAuth);
-                set("Authorization", authHeader);
-            }
-        };
-    }
+    // {
+    // String auth = username + ":" + password;
+    // byte[] encodedAuth =
+    // Base64.getEncoder().encode(auth.getBytes(Charset.forName("US-ASCII")));
+    // String authHeader = "Basic " + new String(encodedAuth);
+    // set("Authorization", authHeader);
+    // }
+    // };
+    // }
 
 }
