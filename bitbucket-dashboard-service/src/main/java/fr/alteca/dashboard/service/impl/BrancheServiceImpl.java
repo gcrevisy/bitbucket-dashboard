@@ -1,6 +1,8 @@
 package fr.alteca.dashboard.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,11 +58,19 @@ public class BrancheServiceImpl implements BrancheService {
 
         List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
+        GregorianCalendar today = (GregorianCalendar) GregorianCalendar.getInstance();
 
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(today.getTime());
+        logger.info(date);
         for (Branche item : liste) {
 
-            // FIXME corriger les controles sur les dates
-            result.add(item);
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(item.getDateCreation().getTime());
+            gc.add(GregorianCalendar.DAY_OF_MONTH, 4);
+            date = new SimpleDateFormat("dd-MM-yyyy").format(gc.getTime());
+            logger.info(date);
+            if (today.compareTo(gc) > 0)
+                result.add(item);
         }
 
         return result;
