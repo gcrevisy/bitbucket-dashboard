@@ -48,9 +48,31 @@
       <artifactId>bootstrap</artifactId>
       <version>4.1.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.pitest</groupId>
+      <artifactId>pitest-maven</artifactId>
+      <version>1.4.9</version>
+    </dependency>
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>1.4.9</version>
+          <configuration>
+            <targetClasses>
+              <param>fr.alteca.dashboard.service.*</param>
+            </targetClasses>
+            <targetTests>
+              <param>fr.alteca.dashboard.service.*</param>
+            </targetTests>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.jacoco</groupId>
