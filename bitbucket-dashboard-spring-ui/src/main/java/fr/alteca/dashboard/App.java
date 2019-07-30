@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "fr.alteca.dashboard.controller")
 public class App {
     public static void main(String[] args) {
+
         SpringApplication.run(App.class, args);
     }
 }
