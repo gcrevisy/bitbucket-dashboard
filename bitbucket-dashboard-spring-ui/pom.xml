@@ -12,7 +12,7 @@
   </parent>
 
   <artifactId>bitbucket-dashboard-spring-ui</artifactId>
-
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
