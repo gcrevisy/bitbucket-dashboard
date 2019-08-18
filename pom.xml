@@ -28,6 +28,17 @@
     <module>bitbucket-dashboard-data-access</module>
   </modules>
 
+  <repositories>
+    <repository>
+      <id>stamp-maven-repository-mvn-repo</id>
+      <url>https://stamp-project.github.io/stamp-maven-repository/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -48,12 +59,33 @@
       <artifactId>bootstrap</artifactId>
       <version>4.1.1</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.pitest</groupId>
       <artifactId>pitest-maven</artifactId>
       <version>1.4.9</version>
+    </dependency> -->
+    <dependency>
+      <groupId>fr.inria.stamp</groupId>
+      <artifactId>descartes</artifactId>
+      <version>0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
+
+  <plugin>
+    <groupId>org.pitest</groupId>
+    <artifactId>pitest-maven</artifactId>
+    <version>1.4.7</version>
+    <configuration>
+      <mutationEngine>descartes</mutationEngine>
+    </configuration>
+    <dependencies>
+      <dependency>
+        <groupId>eu.stamp-project</groupId>
+        <artifactId>descartes</artifactId>
+        <version>1.2.5</version>
+      </dependency>
+    </dependencies>
+  </plugin>
 
   <build>
     <plugins>
