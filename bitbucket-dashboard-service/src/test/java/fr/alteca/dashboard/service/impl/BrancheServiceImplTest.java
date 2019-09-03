@@ -77,8 +77,6 @@ public class BrancheServiceImplTest {
         GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
 
         List<Branche> liste = new ArrayList<Branche>();
-        date.add(Calendar.DAY_OF_MONTH, -5);
-        liste.add(new Branche("feature/toto", date, "gcrevisy"));
 
         date.add(Calendar.DAY_OF_MONTH, -10);
         liste.add(new Branche("toto", date, "gcrevisy"));
