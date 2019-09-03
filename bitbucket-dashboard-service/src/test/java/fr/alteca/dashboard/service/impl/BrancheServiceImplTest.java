@@ -24,7 +24,7 @@ public class BrancheServiceImplTest {
         liste.addAll(getListBranchesOk());
 
         BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
-        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
+        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() == 0);
     }
 
     @Test
