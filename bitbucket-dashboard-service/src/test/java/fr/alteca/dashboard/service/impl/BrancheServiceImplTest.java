@@ -19,19 +19,29 @@ public class BrancheServiceImplTest {
 
     @Test
     public void controlerNomOk() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
+
+        List<Branche> liste = new ArrayList<Branche>();
+        liste.addAll(getListBranchesOk());
+
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
         assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
     }
 
     @Test
     public void controlerNomMasterOk() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesMasterOnly()));
+        List<Branche> liste = new ArrayList<Branche>();
+        liste.addAll(getListBranchesMasterOnly());
+
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
         assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() == 0);
     }
 
     @Test
     public void controlerNomKo() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesKo()));
+        List<Branche> liste = new ArrayList<Branche>();
+        liste.addAll(getListBranchesKo());
+
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
         assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
     }
 
@@ -60,11 +70,6 @@ public class BrancheServiceImplTest {
         date.add(Calendar.DAY_OF_MONTH, -5);
         liste.add(new Branche("feature/toto", date, "gcrevisy"));
 
-        date.add(Calendar.DAY_OF_MONTH, -10);
-        liste.add(new Branche("toto", date, "gcrevisy"));
-
-        date.add(Calendar.DAY_OF_MONTH, -15);
-        liste.add(new Branche("", date, "gcrevisy"));
         return liste;
     }
 
