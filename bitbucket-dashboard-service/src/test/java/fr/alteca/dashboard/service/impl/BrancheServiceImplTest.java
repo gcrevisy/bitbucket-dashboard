@@ -57,8 +57,6 @@ public class BrancheServiceImplTest {
                 date.add(Calendar.DAY_OF_MONTH, -10);
                 liste.add(new Branche("toto", date, "gcrevisy"));
 
-                date.add(Calendar.DAY_OF_MONTH, -15);
-                liste.add(new Branche("", date, "gcrevisy"));
                 return liste;
             }
         };
