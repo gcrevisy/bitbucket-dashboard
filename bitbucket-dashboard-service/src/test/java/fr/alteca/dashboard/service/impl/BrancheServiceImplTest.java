@@ -19,47 +19,87 @@ public class BrancheServiceImplTest {
 
     @Test
     public void controlerNomOk() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao());
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
+        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
+    }
+
+    @Test
+    public void controlerNomMasterOk() throws DashboardException {
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesMasterOnly()));
+        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() == 0);
+    }
+
+    @Test
+    public void controlerNomKo() throws DashboardException {
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesKo()));
         assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
     }
 
     @Test
     public void controlerDateCreationOk() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao());
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
         assertTrue(service.controlerDateCreation(new Contexte("gcrevisy")).size() > 0);
     }
 
     @Test(expected = DashboardException.class)
     public void controlerNomContexteNull() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao());
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
         service.controlerNom(null);
     }
 
     @Test(expected = DashboardException.class)
     public void controlerDateCreationContexteNull() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao());
+        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
         service.controlerDateCreation(null);
     }
 
-    private BrancheDao getBrancheDao() {
+    private List<Branche> getListBranchesOk() {
+        GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
+
+        List<Branche> liste = new ArrayList<Branche>();
+        date.add(Calendar.DAY_OF_MONTH, -5);
+        liste.add(new Branche("feature/toto", date, "gcrevisy"));
+
+        date.add(Calendar.DAY_OF_MONTH, -10);
+        liste.add(new Branche("toto", date, "gcrevisy"));
+
+        date.add(Calendar.DAY_OF_MONTH, -15);
+        liste.add(new Branche("", date, "gcrevisy"));
+        return liste;
+    }
+
+    private List<Branche> getListBranchesKo() {
+        GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
+
+        List<Branche> liste = new ArrayList<Branche>();
+        date.add(Calendar.DAY_OF_MONTH, -5);
+        liste.add(new Branche("feature/toto", date, "gcrevisy"));
+
+        date.add(Calendar.DAY_OF_MONTH, -10);
+        liste.add(new Branche("toto", date, "gcrevisy"));
+
+        date.add(Calendar.DAY_OF_MONTH, -15);
+        liste.add(new Branche("", date, "gcrevisy"));
+        return liste;
+    }
+
+    private List<Branche> getListBranchesMasterOnly() {
+        GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
+
+        List<Branche> liste = new ArrayList<Branche>();
+        liste.add(new Branche("master", date, "gcrevisy"));
+
+        return liste;
+    }
+
+    private BrancheDao getBrancheDao(List<Branche> list) {
         return new BrancheDao() {
+
             @Override
-            public List<Branche> listerBranches(Contexte contexte) {
-
-                GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
-
-                List<Branche> liste = new ArrayList<Branche>();
-                liste.add(new Branche("master", date, "gcrevisy"));
-
-                date.add(Calendar.DAY_OF_MONTH, -5);
-                liste.add(new Branche("feature/toto", date, "gcrevisy"));
-
-                date.add(Calendar.DAY_OF_MONTH, -10);
-                liste.add(new Branche("toto", date, "gcrevisy"));
-
-                date.add(Calendar.DAY_OF_MONTH, -15);
-                liste.add(new Branche("", date, "gcrevisy"));
-                return liste;
+            public List<Branche> listerBranches(Contexte contexte) throws DashboardException {
+                List<Branche> result = new ArrayList<Branche>();
+                result.addAll(list);
+                return result;
             }
         };
     }
