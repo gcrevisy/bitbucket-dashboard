@@ -89,7 +89,7 @@ public class BrancheServiceImplTest {
 
         List<Branche> liste = new ArrayList<Branche>();
         liste.add(new Branche("master", date, "gcrevisy"));
-
+      
         return liste;
     }
 
