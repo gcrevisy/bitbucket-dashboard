@@ -7,6 +7,7 @@ import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 
 public interface BrancheService {
+
     /**
      * Controle le nom des branches du dépôt dont l'URI est fournie.
      * 
