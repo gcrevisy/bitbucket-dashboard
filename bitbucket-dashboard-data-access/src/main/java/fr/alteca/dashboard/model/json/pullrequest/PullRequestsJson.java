@@ -1,4 +1,4 @@
-package fr.alteca.dashboard.model.json;
+package fr.alteca.dashboard.model.json.pullrequest;
 
 import java.util.List;
 

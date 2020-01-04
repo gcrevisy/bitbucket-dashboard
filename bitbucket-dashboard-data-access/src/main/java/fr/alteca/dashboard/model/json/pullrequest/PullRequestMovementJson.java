@@ -1,4 +1,6 @@
-package fr.alteca.dashboard.model.json;
+package fr.alteca.dashboard.model.json.pullrequest;
+
+import fr.alteca.dashboard.model.json.BrancheJson;
 
 public class PullRequestMovementJson {
 

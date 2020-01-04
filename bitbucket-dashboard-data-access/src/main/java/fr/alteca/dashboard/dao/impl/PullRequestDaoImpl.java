@@ -16,8 +16,8 @@ import fr.alteca.dashboard.dao.PullRequestDao;
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.PullRequest;
-import fr.alteca.dashboard.model.json.PullRequestJson;
-import fr.alteca.dashboard.model.json.PullRequestsJson;
+import fr.alteca.dashboard.model.json.pullrequest.PullRequestJson;
+import fr.alteca.dashboard.model.json.pullrequest.PullRequestsJson;
 
 public class PullRequestDaoImpl implements PullRequestDao {
     private static Logger logger = LoggerFactory.getLogger(PullRequestDaoImpl.class);
