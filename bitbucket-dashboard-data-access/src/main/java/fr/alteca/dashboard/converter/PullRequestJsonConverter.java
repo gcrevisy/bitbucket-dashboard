@@ -11,7 +11,7 @@ public class PullRequestJsonConverter implements Converter<PullRequestJson, Pull
         PullRequest result = new PullRequest();
 
         result.setName(item.getTitle());
-        result.setAuteur(item.getAuthor().getUser().getNickname());
+        // result.setAuteur(item.getAuthor().getUser().getNickname());
 
         return result;
     }
