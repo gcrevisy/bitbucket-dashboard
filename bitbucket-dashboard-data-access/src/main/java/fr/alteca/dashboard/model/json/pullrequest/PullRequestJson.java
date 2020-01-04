@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PullRequestJson {
+    private String id;
     private String title;
     private PullRequestMovementJson source;
     private PullRequestMovementJson destination;
@@ -15,13 +16,22 @@ public class PullRequestJson {
     public PullRequestJson() {
     }
 
-    public PullRequestJson(String title, PullRequestMovementJson source, PullRequestMovementJson destination,
+    public PullRequestJson(String id, String title, PullRequestMovementJson source, PullRequestMovementJson destination,
             PullRequestAuteurJson author, String updated_on) {
+        this.id = id;
         this.title = title;
         this.source = source;
         this.destination = destination;
         this.author = author;
         this.updated_on = updated_on;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -64,6 +74,11 @@ public class PullRequestJson {
         this.updated_on = updated_on;
     }
 
+    public PullRequestJson id(String id) {
+        this.id = id;
+        return this;
+    }
+
     public PullRequestJson title(String title) {
         this.title = title;
         return this;
@@ -97,7 +112,8 @@ public class PullRequestJson {
             return false;
         }
         PullRequestJson pullRequestJson = (PullRequestJson) o;
-        return Objects.equals(title, pullRequestJson.title) && Objects.equals(source, pullRequestJson.source)
+        return Objects.equals(id, pullRequestJson.id) && Objects.equals(title, pullRequestJson.title)
+                && Objects.equals(source, pullRequestJson.source)
                 && Objects.equals(destination, pullRequestJson.destination)
                 && Objects.equals(author, pullRequestJson.author)
                 && Objects.equals(updated_on, pullRequestJson.updated_on);
@@ -105,14 +121,14 @@ public class PullRequestJson {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, source, destination, author, updated_on);
+        return Objects.hash(id, title, source, destination, author, updated_on);
     }
 
     @Override
     public String toString() {
-        return "{" + " title='" + getTitle() + "'" + ", source='" + getSource() + "'" + ", destination='"
-                + getDestination() + "'" + ", author='" + getAuthor() + "'" + ", updated_on='" + getUpdated_on() + "'"
-                + "}";
+        return "{" + " id='" + getId() + "'" + ", title='" + getTitle() + "'" + ", source='" + getSource() + "'"
+                + ", destination='" + getDestination() + "'" + ", author='" + getAuthor() + "'" + ", updated_on='"
+                + getUpdated_on() + "'" + "}";
     }
 
 }

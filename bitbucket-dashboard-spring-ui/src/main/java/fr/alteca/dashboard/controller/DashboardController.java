@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Contexte;
+import fr.alteca.dashboard.model.PullRequest;
 import fr.alteca.dashboard.model.Repository;
+import fr.alteca.dashboard.service.PullRequestService;
 import fr.alteca.dashboard.service.RepositoryService;
+import fr.alteca.dashboard.service.impl.PullRequestServiceImpl;
 import fr.alteca.dashboard.service.impl.RepositoryServiceImpl;
 
 @Controller
@@ -67,18 +70,20 @@ public class DashboardController {
         logger.info("Entree dans la methode DashboardController#pullrequests : " + model.toString());
 
         Contexte contexte = new Contexte("", "");
+        contexte.setRepositoryName("gcrevisy");
 
         RepositoryService rs = new RepositoryServiceImpl();
-        List<Repository> liste = new ArrayList<Repository>();
+        PullRequestService prs = new PullRequestServiceImpl();
+        List<PullRequest> pullrequests = new ArrayList<PullRequest>();
 
         try {
-            liste.addAll(rs.listerRepositories(contexte));
+            pullrequests.addAll(prs.listerPullRequest(contexte));
         } catch (DashboardException e) {
             logger.warn("Erreur pendant le chargement des repositories" + e.getMessage());
         }
 
         model.addAttribute("contexte", contexte);
-        model.addAttribute("repositories", liste);
+        model.addAttribute("pullrequests", pullrequests); 
 
         return "pullrequests";
     }

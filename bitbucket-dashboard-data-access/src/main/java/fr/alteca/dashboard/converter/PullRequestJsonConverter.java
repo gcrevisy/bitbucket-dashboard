@@ -18,6 +18,7 @@ public class PullRequestJsonConverter implements Converter<PullRequestJson, Pull
     @Override
     public PullRequest convertToModel(PullRequestJson item) throws DashboardException {
         PullRequest result = new PullRequest();
+        result.setId(item.getId());
         result.setName(item.getTitle());
         result.setAuteur(item.getAuthor().getNickname());
         if (StringUtils.isNotBlank(item.getUpdated_on())) {
@@ -25,6 +26,8 @@ public class PullRequestJsonConverter implements Converter<PullRequestJson, Pull
                 GregorianCalendar gc = new GregorianCalendar();
                 gc.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(item.getUpdated_on()));
                 result.setDateCreation(gc);
+                result.setBrancheDepart(item.getSource().getBranch().getName());
+                result.setBrancheArrivee(item.getDestination().getBranch().getName());
             } catch (ParseException e) {
                 logger.error("Erreur pendant la conversion de date", e.getMessage());
                 throw new DashboardException("Erreur pendant la conversion de date", e);

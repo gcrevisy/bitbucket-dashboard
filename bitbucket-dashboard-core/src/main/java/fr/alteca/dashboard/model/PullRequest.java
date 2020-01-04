@@ -1,8 +1,10 @@
 package fr.alteca.dashboard.model;
 
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 public class PullRequest {
+    private String id;
     private String name;
     private GregorianCalendar dateCreation;
     private String auteur;
@@ -12,13 +14,22 @@ public class PullRequest {
     public PullRequest() {
     }
 
-    public PullRequest(String name, GregorianCalendar dateCreation, String auteur, String brancheDepart,
+    public PullRequest(String id, String name, GregorianCalendar dateCreation, String auteur, String brancheDepart,
             String brancheArrivee) {
+        this.id = id;
         this.name = name;
         this.dateCreation = dateCreation;
         this.auteur = auteur;
         this.brancheDepart = brancheDepart;
         this.brancheArrivee = brancheArrivee;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,6 +72,11 @@ public class PullRequest {
         this.brancheArrivee = brancheArrivee;
     }
 
+    public PullRequest id(String id) {
+        this.id = id;
+        return this;
+    }
+
     public PullRequest name(String name) {
         this.name = name;
         return this;
@@ -87,10 +103,29 @@ public class PullRequest {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof PullRequest)) {
+            return false;
+        }
+        PullRequest pullRequest = (PullRequest) o;
+        return Objects.equals(id, pullRequest.id) && Objects.equals(name, pullRequest.name)
+                && Objects.equals(dateCreation, pullRequest.dateCreation) && Objects.equals(auteur, pullRequest.auteur)
+                && Objects.equals(brancheDepart, pullRequest.brancheDepart)
+                && Objects.equals(brancheArrivee, pullRequest.brancheArrivee);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, dateCreation, auteur, brancheDepart, brancheArrivee);
+    }
+
+    @Override
     public String toString() {
-        return "{" + " name='" + getName() + "'" + ", dateCreation='" + getDateCreation() + "'" + ", auteur='"
-                + getAuteur() + "'" + ", brancheDepart='" + getBrancheDepart() + "'" + ", brancheArrivee='"
-                + getBrancheArrivee() + "'" + "}";
+        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", dateCreation='" + getDateCreation()
+                + "'" + ", auteur='" + getAuteur() + "'" + ", brancheDepart='" + getBrancheDepart() + "'"
+                + ", brancheArrivee='" + getBrancheArrivee() + "'" + "}";
     }
 
 }

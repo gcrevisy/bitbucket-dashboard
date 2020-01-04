@@ -25,4 +25,5 @@ public interface BrancheService {
      * @throws DashboardException
      */
     List<Branche> controlerDateCreation(Contexte contexte) throws DashboardException;
+
 }
