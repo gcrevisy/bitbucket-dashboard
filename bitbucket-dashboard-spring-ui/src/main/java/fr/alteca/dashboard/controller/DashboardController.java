@@ -15,7 +15,9 @@ import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.PullRequest;
 import fr.alteca.dashboard.model.Repository;
+import fr.alteca.dashboard.model.RepositoryModel;
 import fr.alteca.dashboard.service.BrancheService;
+import fr.alteca.dashboard.service.DashboardService;
 import fr.alteca.dashboard.service.PullRequestService;
 import fr.alteca.dashboard.service.RepositoryService;
 
@@ -24,13 +26,7 @@ public class DashboardController {
     private Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
     @Autowired
-    private RepositoryService repositoryService;
-
-    @Autowired
-    private BrancheService brancheService;
-
-    @Autowired
-    private PullRequestService pullRequestService;
+    private DashboardService dashboardService;
 
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String home(Model model) {
@@ -40,11 +36,7 @@ public class DashboardController {
 
         List<Repository> liste = new ArrayList<Repository>();
 
-        try {
-            liste.addAll(repositoryService.listerRepositories(contexte));
-        } catch (DashboardException e) {
-            logger.warn("Erreur pendant le chargement des repositories" + e.getMessage());
-        }
+        // FIXME a coder
 
         model.addAttribute("contexte", contexte);
         model.addAttribute("repositories", liste);
@@ -61,11 +53,7 @@ public class DashboardController {
 
         List<Repository> liste = new ArrayList<Repository>();
 
-        try {
-            liste.addAll(repositoryService.listerRepositories(contexte));
-        } catch (DashboardException e) {
-            logger.warn("Erreur pendant le chargement des repositories" + e.getMessage());
-        }
+        // FIXME a coder
 
         model.addAttribute("contexte", contexte);
         model.addAttribute("branches", liste);
@@ -81,20 +69,16 @@ public class DashboardController {
         contexte.setRepositoryName("gcrevisy");
         contexte.setGettingPullRequestInfo(true);
 
-        List<PullRequest> pullrequests = new ArrayList<PullRequest>();
+        List<RepositoryModel> listeItems = new ArrayList<RepositoryModel>();
 
         try {
-            List<Repository> repositories = repositoryService.listerRepositories(contexte);
-            for (Repository repository : repositories) {
-                contexte.setProjectName(repository.getName());
-                pullrequests.addAll(pullRequestService.listerPullRequest(contexte));
-            }
+            listeItems = dashboardService.listerPullRequests(contexte);
         } catch (DashboardException e) {
-            logger.warn("Erreur pendant le chargement des repositories" + e.getMessage());
+            logger.error("Erreur pendant la recuperation des pull requests", e.getMessage());
         }
 
         model.addAttribute("contexte", contexte);
-        model.addAttribute("pullrequests", pullrequests);
+        model.addAttribute("listeItems", listeItems);
 
         return "pullrequests";
     }

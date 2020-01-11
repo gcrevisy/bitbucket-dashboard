@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
-import fr.alteca.dashboard.model.BrancheView;
+import fr.alteca.dashboard.model.BrancheModel;
 
 public class BrancheConverterTest {
 
@@ -36,7 +36,7 @@ public class BrancheConverterTest {
     @Test
     public void convertTargetOk() throws DashboardException {
         BrancheConverter converter = new BrancheConverter();
-        BrancheView branche = converter.convertToViewModel(getData());
+        BrancheModel branche = converter.convertToViewModel(getData());
         Assert.assertEquals(getModel(), branche);
     }
 
@@ -51,7 +51,7 @@ public class BrancheConverterTest {
     @Test
     public void convertTargetOkDateNull() throws DashboardException {
         BrancheConverter converter = new BrancheConverter();
-        BrancheView branche = converter.convertToViewModel(getDataDateNull());
+        BrancheModel branche = converter.convertToViewModel(getDataDateNull());
         Assert.assertEquals(getModelDateNull(), branche);
     }
 
@@ -69,8 +69,8 @@ public class BrancheConverterTest {
         return branche;
     }
 
-    private BrancheView getModel() {
-        BrancheView branche = new BrancheView();
+    private BrancheModel getModel() {
+        BrancheModel branche = new BrancheModel();
         branche.setAuteur("auteur");
         branche.setDateCreation(
                 new SimpleDateFormat("dd/MM/yyyy").format(new GregorianCalendar(2019, 03, 24).getTime()));
@@ -86,8 +86,8 @@ public class BrancheConverterTest {
         return branche;
     }
 
-    private BrancheView getModelDateNull() {
-        BrancheView branche = new BrancheView();
+    private BrancheModel getModelDateNull() {
+        BrancheModel branche = new BrancheModel();
         branche.setAuteur("auteur");
         branche.setDateCreation(null);
         branche.setName("name");

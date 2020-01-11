@@ -2,15 +2,15 @@ package fr.alteca.dashboard.model;
 
 import java.util.Objects;
 
-public class BrancheView {
+public class BrancheModel {
     private String name;
     private String dateCreation;
     private String auteur;
 
-    public BrancheView() {
+    public BrancheModel() {
     }
 
-    public BrancheView(String name, String dateCreation, String auteur) {
+    public BrancheModel(String name, String dateCreation, String auteur) {
         this.name = name;
         this.dateCreation = dateCreation;
         this.auteur = auteur;
@@ -44,10 +44,10 @@ public class BrancheView {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof BrancheView)) {
+        if (!(o instanceof BrancheModel)) {
             return false;
         }
-        BrancheView brancheView = (BrancheView) o;
+        BrancheModel brancheView = (BrancheModel) o;
         return Objects.equals(name, brancheView.name) && Objects.equals(dateCreation, brancheView.dateCreation)
                 && Objects.equals(auteur, brancheView.auteur);
     }

@@ -1,6 +1,5 @@
 package fr.alteca.dashboard.dao.impl;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
