@@ -8,21 +8,24 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.alteca.dashboard.dao.BrancheDao;
-import fr.alteca.dashboard.dao.impl.BrancheDaoImpl;
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.utils.ModelValidator;
 
+@Service
 public class BrancheServiceImpl implements BrancheService {
     private Logger logger = LoggerFactory.getLogger(BrancheServiceImpl.class);
+
+    @Autowired
     private BrancheDao brancheDao;
 
     public BrancheServiceImpl() {
-        brancheDao = new BrancheDaoImpl();
     }
 
     public BrancheServiceImpl(BrancheDao brancheDao) {

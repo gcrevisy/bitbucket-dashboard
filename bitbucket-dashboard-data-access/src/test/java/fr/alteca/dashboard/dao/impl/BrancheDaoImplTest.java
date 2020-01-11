@@ -15,7 +15,7 @@ public class BrancheDaoImplTest {
     @Test
     public void listerRepositoriesTest() throws DashboardException {
         BrancheDao dao = new BrancheDaoImpl();
-        List<Branche> liste = dao.listerBranches(new Contexte("gcrevisy", "poc-junit"));
+        List<Branche> liste = dao.listerBranches(new Contexte("gcrevisy", "poc-junit", true, false));
         Assert.assertTrue(!liste.isEmpty());
     }
 }

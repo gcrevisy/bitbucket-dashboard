@@ -15,7 +15,7 @@ public class PullRequestDaoImplTest {
     @Test
     public void listerPullRequestsTest() throws DashboardException {
         PullRequestDao dao = new PullRequestDaoImpl();
-        List<PullRequest> liste = dao.listerPullRequests(new Contexte("gcrevisy", "poc-junit"));
+        List<PullRequest> liste = dao.listerPullRequests(new Contexte("gcrevisy", "poc-junit", false, true));
         Assert.assertFalse(liste.isEmpty());
     }
 }

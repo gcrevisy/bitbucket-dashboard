@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import fr.alteca.dashboard.converter.BrancheJsonConverter;
@@ -19,6 +20,7 @@ import fr.alteca.dashboard.model.json.BranchesJson;
 import fr.alteca.dashboard.utils.ModelValidator;
 import fr.alteca.dashboard.utils.UriBuilder;
 
+@Service
 public class BrancheDaoImpl implements BrancheDao {
     private Logger logger = LoggerFactory.getLogger(BrancheDaoImpl.class);
 
@@ -38,6 +40,7 @@ public class BrancheDaoImpl implements BrancheDao {
             resultJson.addAll(results.getBody().getValues());
         } catch (Exception e) {
             logger.error("Erreur pendant l'acces a l'api REST", e.getMessage());
+            throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
         }
 
         for (BrancheJson item : resultJson) {

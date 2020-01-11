@@ -25,9 +25,14 @@ public final class UriBuilder {
         if (StringUtils.isNotBlank(contexte.getRepositoryName())) {
             uriValue += contexte.getRepositoryName();
             if (StringUtils.isNotBlank(contexte.getProjectName())) {
-                uriValue += "/" + contexte.getProjectName() + "/refs/branches/";
-                if (StringUtils.isNotBlank(contexte.getBrancheName())) {
-                    uriValue += contexte.getBrancheName();
+                uriValue += "/" + contexte.getProjectName();
+                if (contexte.isGettingBrancheInfo()) {
+                    uriValue += "/refs/branches/";
+                    if (StringUtils.isNotBlank(contexte.getBrancheName())) {
+                        uriValue += contexte.getBrancheName();
+                    }
+                } else if (contexte.isGettingPullRequestInfo()) {
+                    uriValue += "/pullrequests/";
                 }
             }
         }

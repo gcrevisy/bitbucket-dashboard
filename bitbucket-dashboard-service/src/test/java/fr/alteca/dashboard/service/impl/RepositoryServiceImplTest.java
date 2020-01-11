@@ -16,9 +16,9 @@ import fr.alteca.dashboard.service.RepositoryService;
 public class RepositoryServiceImplTest {
 
     @Test
-    public void controlerNomOk() throws DashboardException {
+    public void listerRepositories() throws DashboardException {
         RepositoryService service = new RepositoryServiceImpl(getRepositoryDao());
-        assertTrue(service.listerRepositories(new Contexte()) != null);
+        assertTrue(service.listerRepositories(new Contexte("toto")) != null);
     }
 
     private RepositoryDao getRepositoryDao() {

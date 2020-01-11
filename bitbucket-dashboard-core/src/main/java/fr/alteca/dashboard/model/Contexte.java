@@ -24,6 +24,14 @@ public class Contexte {
         this.projectName = projectName;
     }
 
+    public Contexte(String repositoryName, String projectName, boolean brancheInfo, boolean pullRequestInfo) {
+        this();
+        this.repositoryName = repositoryName;
+        this.projectName = projectName;
+        this.gettingBrancheInfo = brancheInfo;
+        this.gettingPullRequestInfo = pullRequestInfo;
+    }
+
     public Contexte(String repositoryName, String projectName, String brancheName) {
         this();
         this.repositoryName = repositoryName;
