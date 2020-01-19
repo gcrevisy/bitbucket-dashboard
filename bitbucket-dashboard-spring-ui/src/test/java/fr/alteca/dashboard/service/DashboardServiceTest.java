@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
@@ -20,39 +21,21 @@ public class DashboardServiceTest {
         service.listerPullRequests(new Contexte());
     }
 
-    private PullRequestService getPullRequestService() {
-        PullRequestService servie = new PullRequestService() {
-
-            @Override
-            public List<PullRequest> listerPullRequest(Contexte contexte) throws DashboardException {
-                // TODO Auto-generated method stub
-                return new ArrayList<PullRequest>();
-            }
-        };
-        return servie;
-    }
-
-    private BrancheService getBrancheService() {
-        BrancheService service = new BrancheService() {
-
-            @Override
-            public List<Branche> listerBranche(Contexte contexte) throws DashboardException {
-                // TODO Auto-generated method stub
-                return new ArrayList<Branche>();
-            }
-        };
+    private PullRequestService getPullRequestService() throws DashboardException {
+        PullRequestService service = Mockito.mock(PullRequestService.class);
+        Mockito.when(service.listerPullRequest(Mockito.any(Contexte.class))).thenReturn(new ArrayList<PullRequest>());
         return service;
     }
-
-    private RepositoryService getRepositoryService() {
-        RepositoryService service = new RepositoryService() {
-
-            @Override
-            public List<Repository> listerRepositories(Contexte contexte) throws DashboardException {
-                // TODO Auto-generated method stub
-                return new ArrayList<Repository>();
-            }
-        };
+    
+    private BrancheService getBrancheService() throws DashboardException {
+        BrancheService service = Mockito.mock(BrancheService.class);
+        Mockito.when(service.listerBranche(Mockito.any(Contexte.class))).thenReturn(new ArrayList<Branche>());
+        return service;
+    }
+    
+    private RepositoryService getRepositoryService() throws DashboardException {
+        RepositoryService service = Mockito.mock(RepositoryService.class);
+        Mockito.when(service.listerRepositories(Mockito.any(Contexte.class))).thenReturn(new ArrayList<Repository>());
         return service;
     }
 }
