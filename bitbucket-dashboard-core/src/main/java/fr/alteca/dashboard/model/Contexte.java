@@ -6,6 +6,9 @@ public class Contexte {
     private String brancheName;
     private int pageSize;
 
+    private boolean gettingPullRequestInfo;
+    private boolean gettingBrancheInfo;
+
     public Contexte() {
         pageSize = 100;
     }
@@ -19,6 +22,14 @@ public class Contexte {
         this();
         this.repositoryName = repositoryName;
         this.projectName = projectName;
+    }
+
+    public Contexte(String repositoryName, String projectName, boolean brancheInfo, boolean pullRequestInfo) {
+        this();
+        this.repositoryName = repositoryName;
+        this.projectName = projectName;
+        this.gettingBrancheInfo = brancheInfo;
+        this.gettingPullRequestInfo = pullRequestInfo;
     }
 
     public Contexte(String repositoryName, String projectName, String brancheName) {
@@ -67,10 +78,30 @@ public class Contexte {
         this.pageSize = pageSize;
     }
 
+    public boolean isGettingPullRequestInfo() {
+        return this.gettingPullRequestInfo;
+    }
+
+    public void setGettingPullRequestInfo(boolean gettingPullRequestInfo) {
+        this.gettingPullRequestInfo = gettingPullRequestInfo;
+        this.gettingBrancheInfo = !gettingPullRequestInfo;
+    }
+
+    public boolean isGettingBrancheInfo() {
+        return this.gettingBrancheInfo;
+    }
+
+    public void setGettingBrancheInfo(boolean gettingBrancheInfo) {
+        this.gettingBrancheInfo = gettingBrancheInfo;
+        this.gettingPullRequestInfo = !gettingBrancheInfo;
+    }
+
     @Override
     public String toString() {
         return "{" + " repositoryName='" + getRepositoryName() + "'" + ", projectName='" + getProjectName() + "'"
-                + ", brancheName='" + getBrancheName() + "'" + ", pageSize='" + getPageSize() + "'" + "}";
+                + ", brancheName='" + getBrancheName() + "'" + ", pageSize='" + getPageSize() + "'"
+                + ", gettingPullRequestInfo='" + isGettingPullRequestInfo() + "'" + ", gettingBrancheInfo='"
+                + isGettingBrancheInfo() + "'" + "}";
     }
 
 }

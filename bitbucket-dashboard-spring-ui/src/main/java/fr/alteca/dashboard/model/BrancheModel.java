@@ -1,19 +1,17 @@
 package fr.alteca.dashboard.model;
 
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class Branche {
-
+public class BrancheModel {
     private String id;
     private String name;
-    private GregorianCalendar dateCreation;
+    private String dateCreation;
     private String auteur;
 
-    public Branche() {
+    public BrancheModel() {
     }
 
-    public Branche(String id, String name, GregorianCalendar dateCreation, String auteur) {
+    public BrancheModel(String id, String name, String dateCreation, String auteur) {
         this.id = id;
         this.name = name;
         this.dateCreation = dateCreation;
@@ -36,11 +34,11 @@ public class Branche {
         this.name = name;
     }
 
-    public GregorianCalendar getDateCreation() {
+    public String getDateCreation() {
         return this.dateCreation;
     }
 
-    public void setDateCreation(GregorianCalendar dateCreation) {
+    public void setDateCreation(String dateCreation) {
         this.dateCreation = dateCreation;
     }
 
@@ -52,22 +50,22 @@ public class Branche {
         this.auteur = auteur;
     }
 
-    public Branche id(String id) {
+    public BrancheModel id(String id) {
         this.id = id;
         return this;
     }
 
-    public Branche name(String name) {
+    public BrancheModel name(String name) {
         this.name = name;
         return this;
     }
 
-    public Branche dateCreation(GregorianCalendar dateCreation) {
+    public BrancheModel dateCreation(String dateCreation) {
         this.dateCreation = dateCreation;
         return this;
     }
 
-    public Branche auteur(String auteur) {
+    public BrancheModel auteur(String auteur) {
         this.auteur = auteur;
         return this;
     }
@@ -76,12 +74,13 @@ public class Branche {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Branche)) {
+        if (!(o instanceof BrancheModel)) {
             return false;
         }
-        Branche branche = (Branche) o;
-        return Objects.equals(id, branche.id) && Objects.equals(name, branche.name)
-                && Objects.equals(dateCreation, branche.dateCreation) && Objects.equals(auteur, branche.auteur);
+        BrancheModel brancheModel = (BrancheModel) o;
+        return Objects.equals(id, brancheModel.id) && Objects.equals(name, brancheModel.name)
+                && Objects.equals(dateCreation, brancheModel.dateCreation)
+                && Objects.equals(auteur, brancheModel.auteur);
     }
 
     @Override

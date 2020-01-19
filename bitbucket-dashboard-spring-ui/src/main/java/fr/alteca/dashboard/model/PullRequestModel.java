@@ -1,20 +1,19 @@
 package fr.alteca.dashboard.model;
 
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class PullRequest {
+public class PullRequestModel {
     private String id;
     private String name;
-    private GregorianCalendar dateCreation;
+    private String dateCreation;
     private String auteur;
     private String brancheDepart;
     private String brancheArrivee;
 
-    public PullRequest() {
+    public PullRequestModel() {
     }
 
-    public PullRequest(String id, String name, GregorianCalendar dateCreation, String auteur, String brancheDepart,
+    public PullRequestModel(String id, String name, String dateCreation, String auteur, String brancheDepart,
             String brancheArrivee) {
         this.id = id;
         this.name = name;
@@ -40,11 +39,11 @@ public class PullRequest {
         this.name = name;
     }
 
-    public GregorianCalendar getDateCreation() {
+    public String getDateCreation() {
         return this.dateCreation;
     }
 
-    public void setDateCreation(GregorianCalendar dateCreation) {
+    public void setDateCreation(String dateCreation) {
         this.dateCreation = dateCreation;
     }
 
@@ -72,32 +71,32 @@ public class PullRequest {
         this.brancheArrivee = brancheArrivee;
     }
 
-    public PullRequest id(String id) {
+    public PullRequestModel id(String id) {
         this.id = id;
         return this;
     }
 
-    public PullRequest name(String name) {
+    public PullRequestModel name(String name) {
         this.name = name;
         return this;
     }
 
-    public PullRequest dateCreation(GregorianCalendar dateCreation) {
+    public PullRequestModel dateCreation(String dateCreation) {
         this.dateCreation = dateCreation;
         return this;
     }
 
-    public PullRequest auteur(String auteur) {
+    public PullRequestModel auteur(String auteur) {
         this.auteur = auteur;
         return this;
     }
 
-    public PullRequest brancheDepart(String brancheDepart) {
+    public PullRequestModel brancheDepart(String brancheDepart) {
         this.brancheDepart = brancheDepart;
         return this;
     }
 
-    public PullRequest brancheArrivee(String brancheArrivee) {
+    public PullRequestModel brancheArrivee(String brancheArrivee) {
         this.brancheArrivee = brancheArrivee;
         return this;
     }
@@ -106,14 +105,15 @@ public class PullRequest {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof PullRequest)) {
+        if (!(o instanceof PullRequestModel)) {
             return false;
         }
-        PullRequest pullRequest = (PullRequest) o;
-        return Objects.equals(id, pullRequest.id) && Objects.equals(name, pullRequest.name)
-                && Objects.equals(dateCreation, pullRequest.dateCreation) && Objects.equals(auteur, pullRequest.auteur)
-                && Objects.equals(brancheDepart, pullRequest.brancheDepart)
-                && Objects.equals(brancheArrivee, pullRequest.brancheArrivee);
+        PullRequestModel pullRequestModel = (PullRequestModel) o;
+        return Objects.equals(id, pullRequestModel.id) && Objects.equals(name, pullRequestModel.name)
+                && Objects.equals(dateCreation, pullRequestModel.dateCreation)
+                && Objects.equals(auteur, pullRequestModel.auteur)
+                && Objects.equals(brancheDepart, pullRequestModel.brancheDepart)
+                && Objects.equals(brancheArrivee, pullRequestModel.brancheArrivee);
     }
 
     @Override

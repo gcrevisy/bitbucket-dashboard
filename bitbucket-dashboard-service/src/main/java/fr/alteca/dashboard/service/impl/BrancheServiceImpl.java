@@ -8,33 +8,33 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.alteca.dashboard.dao.BrancheDao;
-import fr.alteca.dashboard.dao.impl.BrancheDaoImpl;
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.utils.ModelValidator;
 
+@Service
 public class BrancheServiceImpl implements BrancheService {
     private Logger logger = LoggerFactory.getLogger(BrancheServiceImpl.class);
+
+    @Autowired
     private BrancheDao brancheDao;
 
     public BrancheServiceImpl() {
-        brancheDao = new BrancheDaoImpl();
     }
 
     public BrancheServiceImpl(BrancheDao brancheDao) {
         this.brancheDao = brancheDao;
     }
 
-    @Override
-    public List<Branche> controlerNom(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+    protected List<Branche> controlerNom(List<Branche> liste) {
+        logger.info("Entree dans la methode BrancheService#controlerNom ");
 
-        List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 
         for (Branche item : liste) {
@@ -51,12 +51,10 @@ public class BrancheServiceImpl implements BrancheService {
         return result;
     }
 
-    @Override
-    public List<Branche> controlerDateCreation(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+    protected List<Branche> controlerDateCreation(List<Branche> liste) {
 
-        List<Branche> liste = brancheDao.listerBranches(contexte);
+        logger.info("Entree dans la methode BrancheService#controlerNom");
+
         List<Branche> result = new ArrayList<Branche>();
         GregorianCalendar today = (GregorianCalendar) GregorianCalendar.getInstance();
 
@@ -72,6 +70,20 @@ public class BrancheServiceImpl implements BrancheService {
             if (today.compareTo(gc) > 0)
                 result.add(item);
         }
+
+        return result;
+    }
+
+    @Override
+    public List<Branche> listerBranche(Contexte contexte) throws DashboardException {
+        ModelValidator.validerContexte(contexte);
+        logger.info("Entree dans la methode BrancheService#listerBranche : " + contexte);
+        List<Branche> result = new ArrayList<Branche>();
+
+        List<Branche> liste = brancheDao.listerBranches(contexte);
+
+        result.addAll(controlerDateCreation(liste));
+        result.addAll(controlerNom(liste));
 
         return result;
     }

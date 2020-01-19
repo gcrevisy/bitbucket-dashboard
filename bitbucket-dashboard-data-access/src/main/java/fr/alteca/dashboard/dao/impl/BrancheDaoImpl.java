@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import fr.alteca.dashboard.converter.BrancheJsonConverter;
@@ -19,6 +20,7 @@ import fr.alteca.dashboard.model.json.BranchesJson;
 import fr.alteca.dashboard.utils.ModelValidator;
 import fr.alteca.dashboard.utils.UriBuilder;
 
+@Service
 public class BrancheDaoImpl implements BrancheDao {
     private Logger logger = LoggerFactory.getLogger(BrancheDaoImpl.class);
 
@@ -33,26 +35,12 @@ public class BrancheDaoImpl implements BrancheDao {
         BrancheJsonConverter converter = new BrancheJsonConverter();
 
         try {
-
-            // String username = "gcrevisy@outlook.com";
-            // String password = "zwj3cmb5tp";
-            // HttpEntity httpEntity = new HttpEntity(createHeaders(username, password));
-            // httpEntity.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
-            // ResponseEntity<Branche[]> branches = restTemplate.excChange(new
-            // URI(uriValueBranche), HttpMethod.GET, httpEntity, Branche[].class);
-            // ResponseEntity<Branche[]> branches = restTemplate.exchange(new
-            // URI(uriValueBranche), HttpMethod.GET, null, Branche[].class);
-            // List<Branche> branches = Arrays.asList(restTemplate.getForObject(new
-            // URI(uriValue), Branche[].class));
-
-            // restTemplate.getInterceptors().add(new
-            // BasicAuthorizationInterceptor(username, password));
-
             ResponseEntity<BranchesJson> results = restTemplate.exchange(UriBuilder.buildUri(contexte), HttpMethod.GET,
                     null, BranchesJson.class);
             resultJson.addAll(results.getBody().getValues());
         } catch (Exception e) {
             logger.error("Erreur pendant l'acces a l'api REST", e.getMessage());
+            throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
         }
 
         for (BrancheJson item : resultJson) {
@@ -61,19 +49,5 @@ public class BrancheDaoImpl implements BrancheDao {
 
         return result;
     }
-
-    // private MultiValueMap createHeaders(String username, String password) {
-    // return new HttpHeaders() {
-    // private static final long serialVersionUID = 1L;
-
-    // {
-    // String auth = username + ":" + password;
-    // byte[] encodedAuth =
-    // Base64.getEncoder().encode(auth.getBytes(Charset.forName("US-ASCII")));
-    // String authHeader = "Basic " + new String(encodedAuth);
-    // set("Authorization", authHeader);
-    // }
-    // };
-    // }
 
 }

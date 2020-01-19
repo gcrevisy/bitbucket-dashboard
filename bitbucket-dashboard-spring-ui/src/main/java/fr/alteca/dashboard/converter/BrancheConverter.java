@@ -8,12 +8,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
-import fr.alteca.dashboard.model.BrancheView;
+import fr.alteca.dashboard.model.BrancheModel;
 
-public class BrancheConverter implements Converter<Branche, BrancheView> {
+public class BrancheConverter implements Converter<Branche, BrancheModel> {
 
     @Override
-    public Branche convertToData(BrancheView item) throws DashboardException {
+    public Branche convertToData(BrancheModel item) throws DashboardException {
         if (item == null)
             throw new DashboardException("Item null pendant la conversion");
 
@@ -34,11 +34,11 @@ public class BrancheConverter implements Converter<Branche, BrancheView> {
     }
 
     @Override
-    public BrancheView convertToViewModel(Branche item) throws DashboardException {
+    public BrancheModel convertToViewModel(Branche item) throws DashboardException {
         if (item == null)
             throw new DashboardException("Item null pendant la conversion");
 
-        BrancheView result = new BrancheView();
+        BrancheModel result = new BrancheModel();
 
         result.setAuteur(item.getAuteur());
         if (item.getDateCreation() != null) {

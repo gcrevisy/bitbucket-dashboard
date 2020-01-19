@@ -13,54 +13,31 @@ import fr.alteca.dashboard.dao.BrancheDao;
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
-import fr.alteca.dashboard.service.BrancheService;
 
 public class BrancheServiceImplTest {
 
     @Test
-    public void controlerNomOk() throws DashboardException {
-
-        List<Branche> liste = new ArrayList<Branche>();
-        liste.addAll(getListBranchesOk());
-
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
-        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() == 0);
+    public void controlerNomOk()  {
+        BrancheServiceImpl service = new BrancheServiceImpl(getBrancheDao(new ArrayList<Branche>()));
+        assertTrue(service.controlerNom(getListBranchesOk()).size() == 0);
     }
 
     @Test
-    public void controlerNomMasterOk() throws DashboardException {
-        List<Branche> liste = new ArrayList<Branche>();
-        liste.addAll(getListBranchesMasterOnly());
-
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
-        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() == 0);
+    public void controlerNomMasterOk()  {
+        BrancheServiceImpl service = new BrancheServiceImpl(getBrancheDao(new ArrayList<Branche>()));
+        assertTrue(service.controlerNom(getListBranchesMasterOnly()).size() == 0);
     }
 
     @Test
-    public void controlerNomKo() throws DashboardException {
-        List<Branche> liste = new ArrayList<Branche>();
-        liste.addAll(getListBranchesKo());
-
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(liste));
-        assertTrue(service.controlerNom(new Contexte("gcrevisy")).size() > 0);
+    public void controlerNomKo()  {
+        BrancheServiceImpl service = new BrancheServiceImpl(getBrancheDao(new ArrayList<Branche>()));
+        assertTrue(service.controlerNom(getListBranchesKo()).size() > 0);
     }
 
     @Test
-    public void controlerDateCreationOk() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
-        assertTrue(service.controlerDateCreation(new Contexte("gcrevisy")).size() > 0);
-    }
-
-    @Test(expected = DashboardException.class)
-    public void controlerNomContexteNull() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
-        service.controlerNom(null);
-    }
-
-    @Test(expected = DashboardException.class)
-    public void controlerDateCreationContexteNull() throws DashboardException {
-        BrancheService service = new BrancheServiceImpl(getBrancheDao(getListBranchesOk()));
-        service.controlerDateCreation(null);
+    public void controlerDateCreationOk()  {
+        BrancheServiceImpl service = new BrancheServiceImpl(getBrancheDao(new ArrayList<Branche>()));
+        assertTrue(service.controlerDateCreation(getListBranchesOk()).size() > 0);
     }
 
     private List<Branche> getListBranchesOk() {
@@ -68,7 +45,7 @@ public class BrancheServiceImplTest {
 
         List<Branche> liste = new ArrayList<Branche>();
         date.add(Calendar.DAY_OF_MONTH, -5);
-        liste.add(new Branche("feature/toto", date, "gcrevisy"));
+        liste.add(new Branche("id", "feature/toto", date, "gcrevisy"));
 
         return liste;
     }
@@ -79,7 +56,7 @@ public class BrancheServiceImplTest {
         List<Branche> liste = new ArrayList<Branche>();
 
         date.add(Calendar.DAY_OF_MONTH, -10);
-        liste.add(new Branche("toto", date, "gcrevisy"));
+        liste.add(new Branche("id", "toto", date, "gcrevisy"));
 
         return liste;
     }
@@ -88,8 +65,8 @@ public class BrancheServiceImplTest {
         GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
 
         List<Branche> liste = new ArrayList<Branche>();
-        liste.add(new Branche("master", date, "gcrevisy"));
-      
+        liste.add(new Branche("id", "master", date, "gcrevisy"));
+
         return liste;
     }
 
