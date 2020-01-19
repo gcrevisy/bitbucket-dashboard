@@ -25,14 +25,14 @@
     <br />
     <div style="padding-left: 15%; padding-right: 15%">
         <div th:each="item : ${listeItems}">
-            <span th:text="${item.name}">name</span>
+            <b><span th:text="${item.name}">name</span></b>
             <br /><br />
             <div class="accordion" id="accordionExample">
                 <div class="card" th:each="pr : ${item.pullRequests}">
                     <div class="card-header" th:attr="id='header'+${pr.id}">
                         <h2 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" th:attr="data-target='#panel'+${pr.id}" aria-expanded="false" aria-controls="collapseTwo">
-                                PR : <span th:text="${pr.name}">name</span> // PR : <span th:text="${pr.brancheDepart}">brancheDepart</span> -> PR : <span th:text="${pr.brancheArrivee}">brancheArrivee</span>
+                                PR : <span th:text="${pr.name}">name</span> // branches : <span th:text="${pr.brancheDepart}">brancheDepart</span> -> <span th:text="${pr.brancheArrivee}">brancheArrivee</span>
                             </button>
                         </h2>
                     </div>

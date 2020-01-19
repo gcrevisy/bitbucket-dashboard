@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Contexte;
-import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.model.RepositoryModel;
 import fr.alteca.dashboard.service.DashboardService;
 
@@ -48,19 +47,19 @@ public class DashboardController {
     public String branches(Model model) {
         logger.info("Entree dans la methode DashboardController#branches : " + model.toString());
 
-        Contexte contexte = new Contexte("", "");
+        Contexte contexte = new Contexte("gcrevisy", "");
         contexte.setGettingBrancheInfo(true);
 
-        List<Repository> liste = new ArrayList<Repository>();
+        List<RepositoryModel> liste = new ArrayList<RepositoryModel>();
 
         try {
-            dashboardService.listerBranches(contexte);
+            liste.addAll(dashboardService.listerBranches(contexte));
         } catch (DashboardException e) {
             logger.error("Erreur pendant la recuperation des branches ", e.getCause());
         }
 
         model.addAttribute("contexte", contexte);
-        model.addAttribute("branches", liste);
+        model.addAttribute("listeItems", liste);
 
         return "branches";
     }
