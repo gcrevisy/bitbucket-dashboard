@@ -24,6 +24,22 @@ public class DashboardServiceTest {
         Assert.assertTrue(liste != null && !liste.isEmpty());
     }
 
+    @Test
+    public void listerBranchesOk() throws DashboardException {
+        DashboardService service = new DashboardService(getRepositoryService(), getBrancheService(),
+                getPullRequestService());
+        List<RepositoryModel> liste = service.listerBranches(new Contexte());
+        Assert.assertTrue(liste != null && !liste.isEmpty());
+    }
+
+    @Test
+    public void listerPullRequestsOk() throws DashboardException {
+        DashboardService service = new DashboardService(getRepositoryService(), getBrancheService(),
+                getPullRequestService());
+        List<RepositoryModel> liste = service.listerPullRequests(new Contexte());
+        Assert.assertTrue(liste != null && !liste.isEmpty());
+    }
+
     private PullRequestService getPullRequestService() throws DashboardException {
         PullRequestService service = Mockito.mock(PullRequestService.class);
         Mockito.when(service.listerPullRequest(Mockito.any(Contexte.class))).thenReturn(new ArrayList<PullRequest>());
