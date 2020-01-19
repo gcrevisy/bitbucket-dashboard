@@ -32,7 +32,11 @@ public class DashboardController {
 
         List<Repository> liste = new ArrayList<Repository>();
 
-        // FIXME a coder
+        try {
+            liste.addAll(dashboardService.listerRepositories(contexte));
+        } catch (DashboardException e) {
+            logger.error("Erreur pendant la recuperation des repos ", e.getCause());
+        }
 
         model.addAttribute("contexte", contexte);
         model.addAttribute("repositories", liste);
@@ -49,7 +53,11 @@ public class DashboardController {
 
         List<Repository> liste = new ArrayList<Repository>();
 
-        // FIXME a coder
+        try {
+            dashboardService.listerBranches(contexte);
+        } catch (DashboardException e) {
+            logger.error("Erreur pendant la recuperation des branches ", e.getCause());
+        }
 
         model.addAttribute("contexte", contexte);
         model.addAttribute("branches", liste);
@@ -70,7 +78,7 @@ public class DashboardController {
         try {
             listeItems = dashboardService.listerPullRequests(contexte);
         } catch (DashboardException e) {
-            logger.error("Erreur pendant la recuperation des pull requests", e.getMessage());
+            logger.error("Erreur pendant la recuperation des pull requests", e.getCause());
         }
 
         model.addAttribute("contexte", contexte);

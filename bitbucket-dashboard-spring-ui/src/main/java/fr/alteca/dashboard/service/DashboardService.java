@@ -56,4 +56,9 @@ public class DashboardService {
         return result;
     }
 
+    public List<Repository> listerRepositories(Contexte contexte) throws DashboardException {
+        List<Repository> result = repositoryService.listerRepositories(contexte);
+        return result;
+    }
+
 }
