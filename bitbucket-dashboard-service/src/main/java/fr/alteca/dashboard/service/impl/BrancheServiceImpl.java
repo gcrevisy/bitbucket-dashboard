@@ -32,12 +32,9 @@ public class BrancheServiceImpl implements BrancheService {
         this.brancheDao = brancheDao;
     }
 
-    @Override
-    public List<Branche> controlerNom(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+    protected List<Branche> controlerNom(List<Branche> liste) {
+        logger.info("Entree dans la methode BrancheService#controlerNom ");
 
-        List<Branche> liste = brancheDao.listerBranches(contexte);
         List<Branche> result = new ArrayList<Branche>();
 
         for (Branche item : liste) {
@@ -54,12 +51,10 @@ public class BrancheServiceImpl implements BrancheService {
         return result;
     }
 
-    @Override
-    public List<Branche> controlerDateCreation(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        logger.info("Entree dans la methode BrancheService#controlerNom : " + contexte.toString());
+    protected List<Branche> controlerDateCreation(List<Branche> liste) {
 
-        List<Branche> liste = brancheDao.listerBranches(contexte);
+        logger.info("Entree dans la methode BrancheService#controlerNom");
+
         List<Branche> result = new ArrayList<Branche>();
         GregorianCalendar today = (GregorianCalendar) GregorianCalendar.getInstance();
 
@@ -75,6 +70,20 @@ public class BrancheServiceImpl implements BrancheService {
             if (today.compareTo(gc) > 0)
                 result.add(item);
         }
+
+        return result;
+    }
+
+    @Override
+    public List<Branche> listerBranche(Contexte contexte) throws DashboardException {
+        ModelValidator.validerContexte(contexte);
+        logger.info("Entree dans la methode BrancheService#listerBranche : " + contexte);
+        List<Branche> result = new ArrayList<Branche>();
+
+        List<Branche> liste = brancheDao.listerBranches(contexte);
+
+        result.addAll(controlerDateCreation(liste));
+        result.addAll(controlerNom(liste));
 
         return result;
     }

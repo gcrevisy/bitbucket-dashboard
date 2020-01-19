@@ -13,13 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.alteca.dashboard.exception.DashboardException;
 import fr.alteca.dashboard.model.Contexte;
-import fr.alteca.dashboard.model.PullRequest;
 import fr.alteca.dashboard.model.Repository;
 import fr.alteca.dashboard.model.RepositoryModel;
-import fr.alteca.dashboard.service.BrancheService;
 import fr.alteca.dashboard.service.DashboardService;
-import fr.alteca.dashboard.service.PullRequestService;
-import fr.alteca.dashboard.service.RepositoryService;
 
 @Controller
 public class DashboardController {

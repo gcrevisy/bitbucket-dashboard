@@ -49,8 +49,10 @@ public class DashboardService {
         return result;
     }
 
-    public List<RepositoryModel> listerBranches(Contexte contexte) {
+    public List<RepositoryModel> listerBranches(Contexte contexte) throws DashboardException {
         List<RepositoryModel> result = new ArrayList<RepositoryModel>();
+
+        brancheService.listerBranche(contexte);
         return result;
     }
 
