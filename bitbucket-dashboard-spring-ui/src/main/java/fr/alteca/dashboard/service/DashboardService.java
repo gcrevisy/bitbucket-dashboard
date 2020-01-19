@@ -2,6 +2,7 @@ package fr.alteca.dashboard.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +71,14 @@ public class DashboardService {
             model.name(repository.getName());
             contexte.setProjectName(repository.getName());
             List<Branche> branches = brancheService.listerBranche(contexte);
-
+            int id = 0;
             for (Branche branche : branches) {
                 String dateCreation = new String("");
                 if (branche.getDateCreation() != null) {
                     dateCreation = new SimpleDateFormat("dd/MM/yyyy").format(branche.getDateCreation().getTime());
                 }
-                model.getBranches()
-                        .add(new BrancheModel(branche.getId(), branche.getName(), dateCreation, branche.getAuteur()));
+                model.getBranches().add(
+                        new BrancheModel(String.valueOf(++id), branche.getName(), dateCreation, branche.getAuteur()));
             }
 
             result.add(model);
