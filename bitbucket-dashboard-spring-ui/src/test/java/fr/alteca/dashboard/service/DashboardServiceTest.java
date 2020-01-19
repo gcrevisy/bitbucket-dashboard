@@ -3,6 +3,7 @@ package fr.alteca.dashboard.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -11,14 +12,16 @@ import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.PullRequest;
 import fr.alteca.dashboard.model.Repository;
+import fr.alteca.dashboard.model.RepositoryModel;
 
 public class DashboardServiceTest {
 
     @Test
-    public void listerPullRequestsOk() throws DashboardException {
+    public void listerRepositoriesOk() throws DashboardException {
         DashboardService service = new DashboardService(getRepositoryService(), getBrancheService(),
                 getPullRequestService());
-        service.listerPullRequests(new Contexte());
+        List<RepositoryModel> liste = service.listerRepositories(new Contexte());
+        Assert.assertTrue(liste != null && !liste.isEmpty());
     }
 
     private PullRequestService getPullRequestService() throws DashboardException {
@@ -26,16 +29,18 @@ public class DashboardServiceTest {
         Mockito.when(service.listerPullRequest(Mockito.any(Contexte.class))).thenReturn(new ArrayList<PullRequest>());
         return service;
     }
-    
+
     private BrancheService getBrancheService() throws DashboardException {
         BrancheService service = Mockito.mock(BrancheService.class);
         Mockito.when(service.listerBranche(Mockito.any(Contexte.class))).thenReturn(new ArrayList<Branche>());
         return service;
     }
-    
+
     private RepositoryService getRepositoryService() throws DashboardException {
         RepositoryService service = Mockito.mock(RepositoryService.class);
-        Mockito.when(service.listerRepositories(Mockito.any(Contexte.class))).thenReturn(new ArrayList<Repository>());
+        List<Repository> liste = new ArrayList<Repository>();
+        liste.add(new Repository("name", "scm"));
+        Mockito.when(service.listerRepositories(Mockito.any(Contexte.class))).thenReturn(liste);
         return service;
     }
 }
