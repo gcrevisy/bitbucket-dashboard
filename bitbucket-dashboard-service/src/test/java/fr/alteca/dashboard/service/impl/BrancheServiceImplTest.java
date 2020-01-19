@@ -45,7 +45,7 @@ public class BrancheServiceImplTest {
 
         List<Branche> liste = new ArrayList<Branche>();
         date.add(Calendar.DAY_OF_MONTH, -5);
-        liste.add(new Branche("feature/toto", date, "gcrevisy"));
+        liste.add(new Branche("id", "feature/toto", date, "gcrevisy"));
 
         return liste;
     }
@@ -56,7 +56,7 @@ public class BrancheServiceImplTest {
         List<Branche> liste = new ArrayList<Branche>();
 
         date.add(Calendar.DAY_OF_MONTH, -10);
-        liste.add(new Branche("toto", date, "gcrevisy"));
+        liste.add(new Branche("id", "toto", date, "gcrevisy"));
 
         return liste;
     }
@@ -65,7 +65,7 @@ public class BrancheServiceImplTest {
         GregorianCalendar date = (GregorianCalendar) GregorianCalendar.getInstance();
 
         List<Branche> liste = new ArrayList<Branche>();
-        liste.add(new Branche("master", date, "gcrevisy"));
+        liste.add(new Branche("id", "master", date, "gcrevisy"));
 
         return liste;
     }

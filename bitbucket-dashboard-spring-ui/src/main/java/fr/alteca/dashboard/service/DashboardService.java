@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.alteca.dashboard.exception.DashboardException;
+import fr.alteca.dashboard.model.Branche;
+import fr.alteca.dashboard.model.BrancheModel;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.PullRequest;
 import fr.alteca.dashboard.model.PullRequestModel;
@@ -52,12 +54,38 @@ public class DashboardService {
     public List<RepositoryModel> listerBranches(Contexte contexte) throws DashboardException {
         List<RepositoryModel> result = new ArrayList<RepositoryModel>();
 
-        brancheService.listerBranche(contexte);
+        List<Repository> repositories = repositoryService.listerRepositories(contexte);
+        for (Repository repository : repositories) {
+            RepositoryModel model = new RepositoryModel();
+            model.name(repository.getName());
+            contexte.setProjectName(repository.getName());
+            List<Branche> branches = brancheService.listerBranche(contexte);
+
+            for (Branche branche : branches) {
+                String dateCreation = new String("");
+                if (branche.getDateCreation() != null) {
+                    dateCreation = new SimpleDateFormat("dd/MM/yyyy").format(branche.getDateCreation().getTime());
+                }
+                model.getBranches()
+                        .add(new BrancheModel(branche.getId(), branche.getName(), dateCreation, branche.getAuteur()));
+            }
+
+            result.add(model);
+        }
+
         return result;
     }
 
-    public List<Repository> listerRepositories(Contexte contexte) throws DashboardException {
-        List<Repository> result = repositoryService.listerRepositories(contexte);
+    public List<RepositoryModel> listerRepositories(Contexte contexte) throws DashboardException {
+        List<RepositoryModel> result = new ArrayList<RepositoryModel>();
+
+        List<Repository> repositories = repositoryService.listerRepositories(contexte);
+        for (Repository repository : repositories) {
+            RepositoryModel model = new RepositoryModel();
+            model.name(repository.getName());
+            result.add(model);
+        }
+
         return result;
     }
 

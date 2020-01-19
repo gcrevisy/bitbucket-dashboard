@@ -30,7 +30,7 @@ public class DashboardController {
 
         Contexte contexte = new Contexte("", "");
 
-        List<Repository> liste = new ArrayList<Repository>();
+        List<RepositoryModel> liste = new ArrayList<RepositoryModel>();
 
         try {
             liste.addAll(dashboardService.listerRepositories(contexte));
