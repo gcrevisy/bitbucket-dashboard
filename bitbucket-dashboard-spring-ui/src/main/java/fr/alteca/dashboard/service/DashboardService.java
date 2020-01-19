@@ -27,6 +27,16 @@ public class DashboardService {
     @Autowired
     private PullRequestService pullRequestService;
 
+    public DashboardService() {
+    }
+
+    public DashboardService(RepositoryService repositoryService, BrancheService brancheService,
+            PullRequestService pullRequestService) {
+        this.repositoryService = repositoryService;
+        this.brancheService = brancheService;
+        this.pullRequestService = pullRequestService;
+    }
+
     public List<RepositoryModel> listerPullRequests(Contexte contexte) throws DashboardException {
         List<RepositoryModel> result = new ArrayList<RepositoryModel>();
 

@@ -9,9 +9,9 @@ import fr.alteca.dashboard.model.PullRequest;
 public interface PullRequestService {
 
     /**
-     * 
-     * @param contexte
-     * @return
+     * Service listant les pulls requests en attente.
+     * @param contexte {@link Contexte}
+     * @return Liste de {@link PullRequest}
      * @throws DashboardException
      */
     List<PullRequest> listerPullRequest(Contexte contexte) throws DashboardException;
