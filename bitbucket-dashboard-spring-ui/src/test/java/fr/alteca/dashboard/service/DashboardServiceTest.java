@@ -1,6 +1,7 @@
 package fr.alteca.dashboard.service;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -42,13 +43,17 @@ public class DashboardServiceTest {
 
     private PullRequestService getPullRequestService() throws DashboardException {
         PullRequestService service = Mockito.mock(PullRequestService.class);
-        Mockito.when(service.listerPullRequest(Mockito.any(Contexte.class))).thenReturn(new ArrayList<PullRequest>());
+        List<PullRequest> liste = new ArrayList<PullRequest>();
+        liste.add(new PullRequest("id", "name", new GregorianCalendar(), "auteur", "brancheDepart", "brancheArrivee"));
+        Mockito.when(service.listerPullRequest(Mockito.any(Contexte.class))).thenReturn(liste);
         return service;
     }
 
     private BrancheService getBrancheService() throws DashboardException {
         BrancheService service = Mockito.mock(BrancheService.class);
-        Mockito.when(service.listerBranche(Mockito.any(Contexte.class))).thenReturn(new ArrayList<Branche>());
+        List<Branche> liste = new ArrayList<Branche>();
+        liste.add(new Branche("id", "name", new GregorianCalendar(), "auteur"));
+        Mockito.when(service.listerBranche(Mockito.any(Contexte.class))).thenReturn(liste);
         return service;
     }
 
