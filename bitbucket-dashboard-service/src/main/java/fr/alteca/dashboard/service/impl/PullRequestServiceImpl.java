@@ -16,19 +16,20 @@ import fr.alteca.dashboard.utils.ModelValidator;
 
 @Service
 public class PullRequestServiceImpl implements PullRequestService {
-    private Logger logger = LoggerFactory.getLogger(PullRequestServiceImpl.class);
+  private Logger logger = LoggerFactory.getLogger(PullRequestServiceImpl.class);
 
-    @Autowired
-    private PullRequestDao pullRequestDao;
+  @Autowired
+  private PullRequestDao pullRequestDao;
 
-    public PullRequestServiceImpl() {
-    }
+  public PullRequestServiceImpl() {
+  }
 
-    @Override
-    public List<PullRequest> listerPullRequest(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        logger.info("Entree dans la methode PullRequestServiceImpl#listerPullRequest : " + contexte.toString());
-        return pullRequestDao.listerPullRequests(contexte);
-    }
+  @Override
+  public List<PullRequest> listerPullRequest(Contexte contexte) throws DashboardException {
+	ModelValidator.validerContexte(contexte);
+	logger.info("Entree dans la methode PullRequestServiceImpl#listerPullRequest : " + contexte.toString());
+	List<PullRequest> liste = pullRequestDao.listerPullRequests(contexte);
+	return liste;
+  }
 
 }

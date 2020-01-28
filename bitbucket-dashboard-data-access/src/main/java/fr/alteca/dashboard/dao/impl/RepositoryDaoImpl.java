@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,30 +24,35 @@ import fr.alteca.dashboard.utils.UriBuilder;
 
 @Service
 public class RepositoryDaoImpl implements RepositoryDao {
-    private static Logger logger = LoggerFactory.getLogger(RepositoryDaoImpl.class);
+  private static Logger logger = LoggerFactory.getLogger(RepositoryDaoImpl.class);
 
-    @Override
-    public List<Repository> listerRepositories(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        List<Repository> result = new ArrayList<Repository>();
-        List<RepositoryJson> resultJson = new ArrayList<RepositoryJson>();
+  @Override
+  public List<Repository> listerRepositories(Contexte contexte) throws DashboardException {
+	ModelValidator.validerContexte(contexte);
+	List<Repository> result = new ArrayList<>();
+	List<RepositoryJson> resultJson = new ArrayList<>();
 
-        RestTemplate restTemplate = new RestTemplate();
-        RepositoryJsonCoverter converter = new RepositoryJsonCoverter();
+	RestTemplate restTemplate = new RestTemplate();
+	RepositoryJsonCoverter converter = new RepositoryJsonCoverter();
 
-        try {
-            ResponseEntity<RepositoriesJson> results = restTemplate.exchange(UriBuilder.buildUri(contexte),
-                    HttpMethod.GET, null, RepositoriesJson.class);
-            resultJson.addAll(results.getBody().getValues());
-        } catch (Exception e) {
-            logger.error("Erreur pendant l'acces a l'api REST", e.getMessage());
-            throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
-        }
+	try {
 
-        for (RepositoryJson item : resultJson) {
-            result.add(converter.convertToModel(item));
-        }
+	  String base64Credentials = "c3ZjZWdpdGplbmtpbnM6aE1UR05ZQjA5Rkp0XzY2SEhPcnY=";
+	  HttpHeaders headers = new HttpHeaders();
+	  headers.add("Authorization", "Basic " + base64Credentials);
+	  HttpEntity<RepositoriesJson> entity = new HttpEntity<>(headers);
 
-        return result;
-    }
+	  ResponseEntity<RepositoriesJson> results = restTemplate.exchange(UriBuilder.buildUri(contexte), HttpMethod.GET, entity, RepositoriesJson.class);
+	  resultJson.addAll(results.getBody().getValues());
+	} catch (Exception e) {
+	  logger.error("Erreur pendant l'acces a l'api REST");
+	  throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
+	}
+
+	for (RepositoryJson item : resultJson) {
+	  result.add(converter.convertToModel(item));
+	}
+
+	return result;
+  }
 }

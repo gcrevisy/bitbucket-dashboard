@@ -26,7 +26,7 @@
     <div style="padding-left: 15%; padding-right: 15%">
         <div th:each="item : ${listeItems}">
             <b><span th:text="${item.name}">name</span></b>
-            <br /><br />
+            <br />
             <div class="accordion" id="accordionExample">
                 <div class="card" th:each="pr : ${item.pullRequests}">
                     <div class="card-header" th:attr="id='header'+${pr.id}">
@@ -50,6 +50,7 @@
                     </div>
                 </div>
             </div>
+            <br /><br />
         </div>
     </div>
 

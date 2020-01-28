@@ -7,47 +7,48 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BrancheJson {
 
-    private String name;
-    private TargetJson target;
+  private String displayId;
+  private TargetJson target;
 
-    public BrancheJson() {
-    }
+  public BrancheJson() {
+  }
 
-    public BrancheJson(String name, TargetJson target) {
-        this.name = name;
-        this.target = target;
-    }
+  public BrancheJson(String name, TargetJson target) {
+	this.displayId = name;
+	this.target = target;
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  @Override
+  public boolean equals(Object o) {
+	if (o == this) {
+	  return true;
+	}
+	if (!(o instanceof BrancheJson)) {
+	  return false;
+	}
+	BrancheJson brancheJson = (BrancheJson) o;
+	return Objects.equals(displayId, brancheJson.displayId) && Objects.equals(target, brancheJson.target);
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+	return this.displayId;
+  }
 
-    public TargetJson getTarget() {
-        return this.target;
-    }
+  public TargetJson getTarget() {
+	return this.target;
+  }
 
-    public void setTarget(TargetJson target) {
-        this.target = target;
-    }
+  @Override
+  public int hashCode() {
+	return Objects.hash(displayId, target);
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof BrancheJson)) {
-            return false;
-        }
-        BrancheJson brancheJson = (BrancheJson) o;
-        return Objects.equals(name, brancheJson.name) && Objects.equals(target, brancheJson.target);
-    }
+  public void setName(String name) {
+	this.displayId = name;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, target);
-    }
+  public void setTarget(TargetJson target) {
+	this.target = target;
+  }
 
 }
