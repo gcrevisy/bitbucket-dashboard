@@ -12,40 +12,41 @@ import fr.alteca.dashboard.model.Contexte;
 
 public final class UriBuilder {
 
-    private static Logger logger = LoggerFactory.getLogger(UriBuilder.class);
+  private static Logger logger = LoggerFactory.getLogger(UriBuilder.class);
 
-    private UriBuilder() {
-    }
+  public static URI buildUri(Contexte contexte) throws DashboardException {
+	ModelValidator.validerContexte(contexte);
+	URI uri = null;
+	// "https://bitbucket.b.bbg/rest/api/1.0/projects/parme/repos/parme-service-protection/pull-requests"
+	String uriValue = "https://bitbucket.b.bbg/rest/api/1.0/projects/";
 
-    public static URI buildUri(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
-        URI uri = null;
-        String uriValue = "https://api.bitbucket.org/2.0/repositories/";
+	if (StringUtils.isNotBlank(contexte.getRepositoryName())) {
+	  uriValue += contexte.getRepositoryName() + "/repos";
+	  if (StringUtils.isNotBlank(contexte.getProjectName())) {
+		uriValue += "/" + contexte.getProjectName();
+		if (contexte.isGettingBrancheInfo()) {
+		  uriValue += "/refs/branches/";
+		  if (StringUtils.isNotBlank(contexte.getBrancheName())) {
+			uriValue += contexte.getBrancheName();
+		  }
+		} else if (contexte.isGettingPullRequestInfo()) {
+		  uriValue += "/pull-requests/";
+		}
+	  }
+	}
+	uriValue += "?limit=" + contexte.getPageSize();
+	try {
+	  logger.info("Construction de l'uri " + uriValue);
+	  uri = new URI(uriValue);
+	} catch (URISyntaxException e) {
+	  logger.error("Impossible de construire l'URI avec le contexte" + contexte.toString());
+	  throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
+	}
 
-        if (StringUtils.isNotBlank(contexte.getRepositoryName())) {
-            uriValue += contexte.getRepositoryName();
-            if (StringUtils.isNotBlank(contexte.getProjectName())) {
-                uriValue += "/" + contexte.getProjectName();
-                if (contexte.isGettingBrancheInfo()) {
-                    uriValue += "/refs/branches/";
-                    if (StringUtils.isNotBlank(contexte.getBrancheName())) {
-                        uriValue += contexte.getBrancheName();
-                    }
-                } else if (contexte.isGettingPullRequestInfo()) {
-                    uriValue += "/pullrequests/";
-                }
-            }
-        }
-        uriValue += "?limit=" + contexte.getPageSize();
-        try {
-            logger.info("Construction de l'uri " + uriValue);
-            uri = new URI(uriValue);
-        } catch (URISyntaxException e) {
-            logger.error("Impossible de construire l'URI avec le contexte" + contexte.toString());
-            throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
-        }
+	return uri;
+  }
 
-        return uri;
-    }
+  private UriBuilder() {
+  }
 
 }

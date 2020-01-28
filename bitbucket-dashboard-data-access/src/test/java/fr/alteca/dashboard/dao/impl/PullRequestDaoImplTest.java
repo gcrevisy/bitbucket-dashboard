@@ -12,10 +12,10 @@ import fr.alteca.dashboard.model.PullRequest;
 
 public class PullRequestDaoImplTest {
 
-    @Test
-    public void listerPullRequestsTest() throws DashboardException {
-        PullRequestDao dao = new PullRequestDaoImpl();
-        List<PullRequest> liste = dao.listerPullRequests(new Contexte("gcrevisy", "poc-junit", false, true));
-        Assert.assertFalse(liste.isEmpty());
-    }
+  @Test
+  public void listerPullRequestsTest() throws DashboardException {
+	PullRequestDao dao = new PullRequestDaoImpl();
+	List<PullRequest> liste = dao.listerPullRequests(new Contexte("parme", "", false, true));
+	Assert.assertFalse(liste.isEmpty());
+  }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,37 +19,42 @@ import fr.alteca.dashboard.model.Branche;
 import fr.alteca.dashboard.model.Contexte;
 import fr.alteca.dashboard.model.json.BrancheJson;
 import fr.alteca.dashboard.model.json.BranchesJson;
+import fr.alteca.dashboard.model.json.RepositoriesJson;
 import fr.alteca.dashboard.utils.ModelValidator;
 import fr.alteca.dashboard.utils.UriBuilder;
 
 @Service
 public class BrancheDaoImpl implements BrancheDao {
-    private Logger logger = LoggerFactory.getLogger(BrancheDaoImpl.class);
+  private Logger logger = LoggerFactory.getLogger(BrancheDaoImpl.class);
 
-    @Override
-    public List<Branche> listerBranches(Contexte contexte) throws DashboardException {
-        ModelValidator.validerContexte(contexte);
+  @Override
+  public List<Branche> listerBranches(Contexte contexte) throws DashboardException {
+	ModelValidator.validerContexte(contexte);
 
-        List<Branche> result = new ArrayList<Branche>();
-        List<BrancheJson> resultJson = new ArrayList<BrancheJson>();
+	List<Branche> result = new ArrayList<>();
+	List<BrancheJson> resultJson = new ArrayList<>();
 
-        RestTemplate restTemplate = new RestTemplate();
-        BrancheJsonConverter converter = new BrancheJsonConverter();
+	RestTemplate restTemplate = new RestTemplate();
+	BrancheJsonConverter converter = new BrancheJsonConverter();
 
-        try {
-            ResponseEntity<BranchesJson> results = restTemplate.exchange(UriBuilder.buildUri(contexte), HttpMethod.GET,
-                    null, BranchesJson.class);
-            resultJson.addAll(results.getBody().getValues());
-        } catch (Exception e) {
-            logger.error("Erreur pendant l'acces a l'api REST", e.getMessage());
-            throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
-        }
+	try {
+	  String base64Credentials = "c3ZjZWdpdGplbmtpbnM6aE1UR05ZQjA5Rkp0XzY2SEhPcnY=";
+	  HttpHeaders headers = new HttpHeaders();
+	  headers.add("Authorization", "Basic " + base64Credentials);
+	  HttpEntity<RepositoriesJson> entity = new HttpEntity<>(headers);
 
-        for (BrancheJson item : resultJson) {
-            result.add(converter.convertToModel(item));
-        }
+	  ResponseEntity<BranchesJson> results = restTemplate.exchange(UriBuilder.buildUri(contexte), HttpMethod.GET, entity, BranchesJson.class);
+	  resultJson.addAll(results.getBody().getValues());
+	} catch (Exception e) {
+	  logger.error("Erreur pendant l'acces a l'api REST", e.getMessage());
+	  throw new DashboardException("Impossible de construire l'URI avec le contexte" + contexte.toString(), e);
+	}
 
-        return result;
-    }
+	for (BrancheJson item : resultJson) {
+	  result.add(converter.convertToModel(item));
+	}
+
+	return result;
+  }
 
 }

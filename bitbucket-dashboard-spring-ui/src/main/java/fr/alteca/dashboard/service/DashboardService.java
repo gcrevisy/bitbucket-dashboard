@@ -2,7 +2,6 @@ package fr.alteca.dashboard.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,85 +18,84 @@ import fr.alteca.dashboard.model.RepositoryModel;
 
 @Service
 public class DashboardService {
-    @Autowired
-    private RepositoryService repositoryService;
+  @Autowired
+  private RepositoryService repositoryService;
 
-    @Autowired
-    private BrancheService brancheService;
+  @Autowired
+  private BrancheService brancheService;
 
-    @Autowired
-    private PullRequestService pullRequestService;
+  @Autowired
+  private PullRequestService pullRequestService;
 
-    public DashboardService() {
-    }
+  public DashboardService() {
+  }
 
-    public DashboardService(RepositoryService repositoryService, BrancheService brancheService,
-            PullRequestService pullRequestService) {
-        this.repositoryService = repositoryService;
-        this.brancheService = brancheService;
-        this.pullRequestService = pullRequestService;
-    }
+  public DashboardService(RepositoryService repositoryService, BrancheService brancheService, PullRequestService pullRequestService) {
+	this.repositoryService = repositoryService;
+	this.brancheService = brancheService;
+	this.pullRequestService = pullRequestService;
+  }
 
-    public List<RepositoryModel> listerPullRequests(Contexte contexte) throws DashboardException {
-        List<RepositoryModel> result = new ArrayList<RepositoryModel>();
+  public List<RepositoryModel> listerBranches(Contexte contexte) throws DashboardException {
+	List<RepositoryModel> result = new ArrayList<>();
 
-        List<Repository> repositories = repositoryService.listerRepositories(contexte);
-        for (Repository repository : repositories) {
-            RepositoryModel model = new RepositoryModel();
-            model.name(repository.getName());
-            contexte.setProjectName(repository.getName());
-            List<PullRequest> requests = pullRequestService.listerPullRequest(contexte);
+	List<Repository> repositories = repositoryService.listerRepositories(contexte);
+	for (Repository repository : repositories) {
+	  RepositoryModel model = new RepositoryModel();
+	  contexte.setProjectName(repository.getName());
+	  List<Branche> branches = brancheService.listerBranche(contexte);
+	  int id = 0;
+	  for (Branche branche : branches) {
+		String dateCreation = new String("");
+		if (branche.getDateCreation() != null) {
+		  dateCreation = new SimpleDateFormat("dd/MM/yyyy").format(branche.getDateCreation().getTime());
+		}
+		model.getBranches().add(new BrancheModel(String.valueOf(++id), branche.getName(), dateCreation, branche.getAuteur()));
+	  }
+	  if (!branches.isEmpty()) {
+		model.name(repository.getName());
+		result.add(model);
+	  }
+	}
 
-            for (PullRequest request : requests) {
-                String dateCreation = new String("");
-                if (request.getDateCreation() != null) {
-                    dateCreation = new SimpleDateFormat("dd/MM/yyyy").format(request.getDateCreation().getTime());
-                }
-                model.getPullRequests().add(new PullRequestModel(request.getId(), request.getName(), dateCreation,
-                        request.getAuteur(), request.getBrancheDepart(), request.getBrancheArrivee()));
-            }
+	return result;
+  }
 
-            result.add(model);
-        }
-        return result;
-    }
+  public List<RepositoryModel> listerPullRequests(Contexte contexte) throws DashboardException {
+	List<RepositoryModel> result = new ArrayList<>();
 
-    public List<RepositoryModel> listerBranches(Contexte contexte) throws DashboardException {
-        List<RepositoryModel> result = new ArrayList<RepositoryModel>();
+	List<Repository> repositories = repositoryService.listerRepositories(contexte);
+	for (Repository repository : repositories) {
+	  RepositoryModel model = new RepositoryModel();
+	  contexte.setProjectName(repository.getName());
+	  List<PullRequest> requests = pullRequestService.listerPullRequest(contexte);
 
-        List<Repository> repositories = repositoryService.listerRepositories(contexte);
-        for (Repository repository : repositories) {
-            RepositoryModel model = new RepositoryModel();
-            model.name(repository.getName());
-            contexte.setProjectName(repository.getName());
-            List<Branche> branches = brancheService.listerBranche(contexte);
-            int id = 0;
-            for (Branche branche : branches) {
-                String dateCreation = new String("");
-                if (branche.getDateCreation() != null) {
-                    dateCreation = new SimpleDateFormat("dd/MM/yyyy").format(branche.getDateCreation().getTime());
-                }
-                model.getBranches().add(
-                        new BrancheModel(String.valueOf(++id), branche.getName(), dateCreation, branche.getAuteur()));
-            }
+	  for (PullRequest request : requests) {
+		String dateCreation = new String("");
+		if (request.getDateCreation() != null) {
+		  dateCreation = new SimpleDateFormat("dd/MM/yyyy").format(request.getDateCreation().getTime());
+		}
+		model.getPullRequests().add(new PullRequestModel(request.getId(), request.getName(), dateCreation, request.getAuteur(), request.getBrancheDepart(), request.getBrancheArrivee()));
+	  }
+	  if (!requests.isEmpty()) {
+		model.name(repository.getName());
+		result.add(model);
+	  }
+	}
+	return result;
+  }
 
-            result.add(model);
-        }
+  public List<RepositoryModel> listerRepositories(Contexte contexte) throws DashboardException {
+	List<RepositoryModel> result = new ArrayList<>();
 
-        return result;
-    }
+	List<Repository> repositories = repositoryService.listerRepositories(contexte);
+	for (Repository repository : repositories) {
+	  RepositoryModel model = new RepositoryModel();
+	  model.name(repository.getName());
+	  result.add(model);
+	}
 
-    public List<RepositoryModel> listerRepositories(Contexte contexte) throws DashboardException {
-        List<RepositoryModel> result = new ArrayList<RepositoryModel>();
-
-        List<Repository> repositories = repositoryService.listerRepositories(contexte);
-        for (Repository repository : repositories) {
-            RepositoryModel model = new RepositoryModel();
-            model.name(repository.getName());
-            result.add(model);
-        }
-
-        return result;
-    }
+	return result;
+  }
 
 }

@@ -18,72 +18,71 @@ import fr.alteca.dashboard.service.DashboardService;
 
 @Controller
 public class DashboardController {
-    private Logger logger = LoggerFactory.getLogger(DashboardController.class);
+  private Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
-    @Autowired
-    private DashboardService dashboardService;
+  @Autowired
+  private DashboardService dashboardService;
 
-    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
-    public String home(Model model) {
-        logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
+  @RequestMapping(value = { "/branches" }, method = RequestMethod.GET)
+  public String branches(Model model) {
+	logger.info("Entree dans la methode DashboardController#branches : " + model.toString());
 
-        Contexte contexte = new Contexte("", "");
+	Contexte contexte = new Contexte("parme", "");
+	contexte.setGettingBrancheInfo(true);
 
-        List<RepositoryModel> liste = new ArrayList<RepositoryModel>();
+	List<RepositoryModel> liste = new ArrayList<>();
 
-        try {
-            liste.addAll(dashboardService.listerRepositories(contexte));
-        } catch (DashboardException e) {
-            logger.error("Erreur pendant la recuperation des repos ", e.getCause());
-        }
+	try {
+	  liste.addAll(dashboardService.listerBranches(contexte));
+	} catch (DashboardException e) {
+	  logger.error("Erreur pendant la recuperation des branches ", e.getCause());
+	}
 
-        model.addAttribute("contexte", contexte);
-        model.addAttribute("repositories", liste);
+	model.addAttribute("contexte", contexte);
+	model.addAttribute("listeItems", liste);
 
-        return "home";
-    }
+	return "branches";
+  }
 
-    @RequestMapping(value = { "/branches" }, method = RequestMethod.GET)
-    public String branches(Model model) {
-        logger.info("Entree dans la methode DashboardController#branches : " + model.toString());
+  @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+  public String home(Model model) {
+	logger.info("Entree dans la methode DashboardController#homePage : " + model.toString());
 
-        Contexte contexte = new Contexte("gcrevisy", "");
-        contexte.setGettingBrancheInfo(true);
+	Contexte contexte = new Contexte("", "");
 
-        List<RepositoryModel> liste = new ArrayList<RepositoryModel>();
+	List<RepositoryModel> liste = new ArrayList<>();
 
-        try {
-            liste.addAll(dashboardService.listerBranches(contexte));
-        } catch (DashboardException e) {
-            logger.error("Erreur pendant la recuperation des branches ", e.getCause());
-        }
+	try {
+	  liste.addAll(dashboardService.listerRepositories(contexte));
+	} catch (DashboardException e) {
+	  logger.error("Erreur pendant la recuperation des repos ", e.getCause());
+	}
 
-        model.addAttribute("contexte", contexte);
-        model.addAttribute("listeItems", liste);
+	model.addAttribute("contexte", contexte);
+	model.addAttribute("repositories", liste);
 
-        return "branches";
-    }
+	return "home";
+  }
 
-    @RequestMapping(value = { "/pullrequests" }, method = RequestMethod.GET)
-    public String pullrequests(Model model) {
-        logger.info("Entree dans la methode DashboardController#pullrequests : " + model.toString());
+  @RequestMapping(value = { "/pullrequests" }, method = RequestMethod.GET)
+  public String pullrequests(Model model) {
+	logger.info("Entree dans la methode DashboardController#pullrequests : " + model.toString());
 
-        Contexte contexte = new Contexte("", "");
-        contexte.setRepositoryName("gcrevisy");
-        contexte.setGettingPullRequestInfo(true);
+	Contexte contexte = new Contexte("parme", "");
+	contexte.setGettingPullRequestInfo(true);
 
-        List<RepositoryModel> listeItems = new ArrayList<RepositoryModel>();
+	List<RepositoryModel> listeItems = new ArrayList<>();
 
-        try {
-            listeItems = dashboardService.listerPullRequests(contexte);
-        } catch (DashboardException e) {
-            logger.error("Erreur pendant la recuperation des pull requests", e.getCause());
-        }
+	try {
+	  listeItems = dashboardService.listerPullRequests(contexte);
+	} catch (DashboardException e) {
+	  logger.error("Erreur pendant la recuperation des pull requests", e.getCause());
+	}
 
-        model.addAttribute("contexte", contexte);
-        model.addAttribute("listeItems", listeItems);
+	model.addAttribute("contexte", contexte);
+	model.addAttribute("listeItems", listeItems);
 
-        return "pullrequests";
-    }
+	return "pullrequests";
+  }
 
 }
